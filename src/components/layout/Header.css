@@ -1,0 +1,97 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-height);
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 28px;
+  gap: 24px;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  padding: 6px 8px;
+  border-radius: 8px;
+  letter-spacing: 0.02em;
+}
+
+.header__back:hover {
+  background: #f2f2f2;
+}
+
+.header__back svg {
+  width: 16px;
+  height: 16px;
+}
+
+.header__slogan {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.header__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .header__slogan {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .header__inner {
+    padding: 0 12px;
+    gap: 10px;
+  }
+
+  .my-courses__trigger {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .header__back span,
+  .header__back {
+    font-size: 12px;
+  }
+}

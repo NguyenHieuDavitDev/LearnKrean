@@ -1,0 +1,244 @@
+.hero-banner {
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.hero-banner__slide {
+  position: relative;
+  border-radius: 20px;
+  min-height: 280px;
+  overflow: hidden;
+  color: #fff;
+  padding: 40px 56px;
+  animation: hero-fade-in 0.45s ease;
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0.55;
+    transform: translateX(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-banner__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  height: 100%;
+  min-height: 200px;
+}
+
+.hero-banner__text {
+  flex: 1;
+  max-width: 480px;
+}
+
+.hero-banner__text h2 {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.hero-banner__title-icon {
+  font-size: 0.85em;
+  vertical-align: -0.05em;
+  opacity: 0.95;
+}
+
+.hero-banner__text p {
+  font-size: 15px;
+  opacity: 0.92;
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+
+.hero-banner__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 22px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.hero-banner__cta:hover {
+  background: #fff;
+  color: #6a11cb;
+}
+
+.hero-banner__visual {
+  flex-shrink: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+}
+
+.hero-banner__visual:hover .hero-banner__box {
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
+}
+
+.hero-banner__box {
+  width: 200px;
+  height: 200px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: float 3s ease-in-out infinite;
+  transition: box-shadow 0.2s ease;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.hero-banner__badge {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.hero-banner__prices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.hero-banner__old {
+  font-size: 14px;
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.hero-banner__new {
+  font-size: 36px;
+  font-weight: 800;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.hero-banner__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  transition: background 0.2s;
+}
+
+.hero-banner__nav:hover {
+  background: #fff;
+}
+
+.hero-banner__nav svg {
+  width: 18px;
+  height: 18px;
+}
+
+.hero-banner__nav--prev {
+  left: 12px;
+}
+
+.hero-banner__nav--next {
+  right: 12px;
+}
+
+.hero-banner__dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.hero-banner__dot {
+  position: relative;
+  width: 28px;
+  height: 4px;
+  border-radius: 2px;
+  background: #d0d0d0;
+  overflow: hidden;
+  transition: background 0.2s, width 0.2s;
+}
+
+.hero-banner__dot--active {
+  background: #c8c8c8;
+  width: 40px;
+}
+
+.hero-banner__dot-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: #555;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .hero-banner__slide {
+    padding: 32px 48px;
+    min-height: auto;
+  }
+
+  .hero-banner__content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-banner__text h2 {
+    font-size: 24px;
+  }
+
+  .hero-banner__box {
+    width: 140px;
+    height: 140px;
+  }
+
+  .hero-banner__badge {
+    font-size: 16px;
+  }
+
+  .hero-banner__new {
+    font-size: 28px;
+  }
+}

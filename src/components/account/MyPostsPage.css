@@ -1,0 +1,165 @@
+.my-posts-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+.my-posts-page__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 32px;
+  align-items: start;
+}
+
+.my-posts-page__main h1 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.my-posts-page__tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.my-posts-page__tabs button {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 12px 0;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+}
+
+.my-posts-page__tabs button.is-active {
+  color: var(--text);
+  border-bottom-color: var(--primary);
+}
+
+.my-posts-page__empty {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.my-posts-page__empty button {
+  font: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.my-posts-page__empty button:hover {
+  text-decoration: underline;
+}
+
+.account-aside {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+}
+
+.account-aside__promo {
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.account-aside__promo-media {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.account-aside__promo-media img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.account-aside__promo-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.account-aside__promo h2 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.account-aside__promo > p {
+  font-size: 13px;
+  opacity: 0.85;
+  margin-bottom: 14px;
+}
+
+.account-aside__promo ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.account-aside__promo li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.account-aside__promo li .svg-inline--fa {
+  color: #7dffa0;
+  margin-top: 2px;
+}
+
+.account-aside__promo-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.2s;
+}
+
+.account-aside__promo-cta:hover {
+  background: #fff5f0;
+}
+
+.account-aside__contact {
+  margin-top: 14px !important;
+  margin-bottom: 0 !important;
+  font-size: 11px !important;
+  opacity: 0.65 !important;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .my-posts-page__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .account-aside {
+    position: static;
+    order: -1;
+  }
+}

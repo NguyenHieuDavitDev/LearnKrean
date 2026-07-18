@@ -1,0 +1,145 @@
+.flashcards-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+.flashcards-page__intro {
+  margin-bottom: 28px;
+}
+
+.flashcards-page__intro h1 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.flashcards-page__intro p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 720px;
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+.flashcards-page__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.flashcards-page__stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flashcards-page__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.flash-deck {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.flash-deck:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.flash-deck__banner {
+  position: relative;
+  height: 120px;
+  display: grid;
+  place-items: center;
+}
+
+.flash-deck__icon {
+  font-size: 42px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+.flash-deck__level {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.flash-deck__body {
+  padding: 18px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.flash-deck__body h2 {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.flash-deck__body p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.flash-deck__meta {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.flash-deck__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.2s;
+}
+
+.flash-deck__cta:hover {
+  background: var(--primary-hover);
+}
+
+@media (max-width: 1024px) {
+  .flashcards-page__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .flashcards-page__intro h1 {
+    font-size: 24px;
+  }
+
+  .flashcards-page__grid {
+    grid-template-columns: 1fr;
+  }
+}

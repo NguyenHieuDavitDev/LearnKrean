@@ -1,0 +1,215 @@
+.profile-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+.profile-page__layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.profile-page__sidebar {
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+}
+
+.profile-page__avatar-wrap {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(135deg, #f05123 0%, #ffd54f 35%, #26c2ad 70%, #667eea 100%);
+  margin-bottom: 16px;
+}
+
+.profile-page__avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+}
+
+.profile-page__sidebar h1 {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.profile-page__handle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.profile-page__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.profile-page__stats strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.profile-page__joined {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.profile-page__activity {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+
+.profile-page__activity h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.profile-page__heatmap {
+  display: flex;
+  gap: 3px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.profile-page__heatmap-week {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.profile-page__heatmap-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: #ebedf0;
+  flex-shrink: 0;
+}
+
+.profile-page__heatmap-cell.is-active {
+  background: #26c2ad;
+}
+
+.profile-page__tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+
+.profile-page__tabs button {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 12px 0;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s;
+}
+
+.profile-page__tabs button.is-active {
+  color: var(--text);
+  border-bottom-color: var(--primary);
+}
+
+.profile-page__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.profile-course-card {
+  cursor: pointer;
+}
+
+.profile-course-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+.profile-course-card:hover h3 {
+  color: var(--primary);
+}
+
+.profile-course-card__thumb {
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.profile-course-card__thumb pre {
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  white-space: pre-line;
+  line-height: 1.15;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-course-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  transition: color 0.2s;
+}
+
+.profile-course-card__price {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.profile-course-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.profile-page__empty {
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 32px 0;
+}
+
+@media (max-width: 900px) {
+  .profile-page__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-page__sidebar {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-page__stats {
+    align-items: center;
+  }
+}

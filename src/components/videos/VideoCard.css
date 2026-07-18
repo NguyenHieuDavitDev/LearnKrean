@@ -1,0 +1,119 @@
+.video-card {
+  cursor: pointer;
+}
+
+.video-card:hover h3 {
+  color: var(--primary);
+}
+
+.video-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+.video-card__thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  transition: transform 0.25s;
+}
+
+.video-card:hover .video-card__thumb {
+  transform: translateY(-2px);
+}
+
+.video-card__play {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  color: #333;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  font-size: 11px;
+}
+
+.video-card__play .svg-inline--fa {
+  margin-left: 1px;
+}
+
+.video-card__duration {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.video-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.2s;
+}
+
+.video-card__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.video-card__stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.video-card__stats .svg-inline--fa {
+  opacity: 0.75;
+  font-size: 12px;
+}
+
+.video-card--compact {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.video-card--compact .video-card__thumb {
+  margin-bottom: 0;
+  border-radius: 10px;
+}
+
+.video-card--compact h3 {
+  font-size: 14px;
+  margin-bottom: 6px;
+  min-height: 0;
+}
+
+.video-card__compact-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+@media (max-width: 560px) {
+  .video-card--compact {
+    grid-template-columns: 120px minmax(0, 1fr);
+    gap: 10px;
+  }
+}
