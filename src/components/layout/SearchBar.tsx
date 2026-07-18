@@ -48,7 +48,7 @@ export function SearchBar({ onSelectResult }: SearchBarProps) {
     const onPointerDown = (e: MouseEvent) => {
       if (!rootRef.current?.contains(e.target as Node)) setOpen(false)
     }
-    const onKeyDown = (e: KeyboardEvent) => {
+    const onKeyDown = (e: globalThis.KeyboardEvent) => {
       if (e.key === 'Escape') {
         setOpen(false)
         inputRef.current?.blur()
