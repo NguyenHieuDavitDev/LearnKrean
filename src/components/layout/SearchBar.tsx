@@ -2,10 +2,7 @@ import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBookOpen,
-  faCirclePlay,
   faComments,
-  faGraduationCap,
-  faLayerGroup,
   faMagnifyingGlass,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons'
@@ -21,11 +18,8 @@ type SearchBarProps = {
   onSelectResult: (result: SearchResult) => void
 }
 
-const KIND_ICON: Record<SearchResultKind, typeof faGraduationCap> = {
-  course: faGraduationCap,
-  flashcard: faLayerGroup,
+const KIND_ICON: Record<SearchResultKind, typeof faBookOpen> = {
   article: faBookOpen,
-  video: faCirclePlay,
   qa: faComments,
 }
 
@@ -38,10 +32,6 @@ export function SearchBar({ onSelectResult }: SearchBarProps) {
   const listId = useId()
 
   const results = useMemo(() => searchCatalog(query), [query])
-
-  useEffect(() => {
-    setActiveIndex(0)
-  }, [query])
 
   useEffect(() => {
     if (!open) return
@@ -95,7 +85,7 @@ export function SearchBar({ onSelectResult }: SearchBarProps) {
       <input
         ref={inputRef}
         type="search"
-        placeholder="Tìm khóa học, từ vựng, ngữ pháp..."
+        placeholder="Tìm bài viết, câu hỏi..."
         aria-label="Tìm kiếm"
         aria-autocomplete="list"
         aria-controls={listId}
@@ -103,6 +93,7 @@ export function SearchBar({ onSelectResult }: SearchBarProps) {
         value={query}
         onChange={(e) => {
           setQuery(e.target.value)
+          setActiveIndex(0)
           setOpen(true)
         }}
         onFocus={() => setOpen(true)}
@@ -115,6 +106,7 @@ export function SearchBar({ onSelectResult }: SearchBarProps) {
           aria-label="Xóa tìm kiếm"
           onClick={() => {
             setQuery('')
+            setActiveIndex(0)
             inputRef.current?.focus()
           }}
         >

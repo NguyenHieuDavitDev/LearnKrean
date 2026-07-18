@@ -1,21 +1,18 @@
 import { useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight, faCheck, faClock, faFlag } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faClock, faFlag } from '@fortawesome/free-solid-svg-icons'
 import { getRoadmapById } from '../../data/roadmaps'
-import { getKhoaHocById } from '../../data/courses'
 import './RoadmapDetail.css'
 
 type RoadmapDetailProps = {
   roadmapId: string
   onBack: () => void
-  onSelectKhoaHoc: (khoaHocId: number) => void
   onSelectRoadmap: (roadmapId: string) => void
 }
 
 export function RoadmapDetail({
   roadmapId,
   onBack,
-  onSelectKhoaHoc,
   onSelectRoadmap,
 }: RoadmapDetailProps) {
   const roadmap = getRoadmapById(roadmapId)
@@ -85,54 +82,22 @@ export function RoadmapDetail({
       <section className="roadmap-detail__section">
         <h2>Các bước trong lộ trình</h2>
         <p className="roadmap-detail__section-desc">
-          Học lần lượt từng khóa theo thứ tự bên dưới để nền tảng vững và tiến bộ đều.
+          Thực hiện lần lượt từng chặng bên dưới để xây nền tảng vững và tiến bộ đều.
         </p>
         <ol className="roadmap-detail__steps">
-          {roadmap.steps.map((step, index) => {
-            const course = getKhoaHocById(step.khoaHocId)
-            return (
-              <li key={step.khoaHocId} className="roadmap-detail__step">
+          {roadmap.steps.map((step, index) => (
+              <li key={step.id} className="roadmap-detail__step">
                 <div className="roadmap-detail__step-index" aria-hidden="true">
                   {index + 1}
                 </div>
                 <div className="roadmap-detail__step-body">
                   <div className="roadmap-detail__step-head">
                     <h3>{step.title}</h3>
-                    {course && (
-                      <span className={course.price === 'Miễn phí' ? 'is-free' : 'is-pro'}>
-                        {course.price}
-                      </span>
-                    )}
                   </div>
                   <p>{step.desc}</p>
-                  {course && (
-                    <div className="roadmap-detail__step-meta">
-                      <span>{course.lessons} bài học</span>
-                      <span>{course.durationFull}</span>
-                      <span>{course.level}</span>
-                    </div>
-                  )}
-                  <button
-                    type="button"
-                    className="roadmap-detail__step-cta"
-                    onClick={() => onSelectKhoaHoc(step.khoaHocId)}
-                  >
-                    Xem khóa học
-                    <FontAwesomeIcon icon={faArrowRight} />
-                  </button>
                 </div>
-                {course && (
-                  <div
-                    className="roadmap-detail__step-thumb"
-                    style={{ background: course.gradient }}
-                    aria-hidden="true"
-                  >
-                    <pre>{course.thumbTitle}</pre>
-                  </div>
-                )}
               </li>
-            )
-          })}
+            ))}
         </ol>
       </section>
 

@@ -1,6 +1,5 @@
 import { BRAND } from '../../brand'
 import { BrandLogo } from './BrandLogo'
-import { MyCoursesMenu } from './MyCoursesMenu'
 import { NotificationsMenu } from './NotificationsMenu'
 import { SearchBar } from './SearchBar'
 import { UserMenu } from './UserMenu'
@@ -12,8 +11,6 @@ type HeaderProps = {
   showBack?: boolean
   onBack?: () => void
   onHome?: () => void
-  onSelectKhoaHoc?: (id: number) => void
-  onViewMyCourses?: () => void
   onProfile?: () => void
   onWriteBlog?: () => void
   onMyPosts?: () => void
@@ -29,8 +26,6 @@ export function Header({
   showBack = false,
   onBack,
   onHome,
-  onSelectKhoaHoc,
-  onViewMyCourses,
   onProfile,
   onWriteBlog,
   onMyPosts,
@@ -47,7 +42,6 @@ export function Header({
         <div className="header__left">
           <button type="button" className="header__brand" onClick={onHome} aria-label={BRAND.name}>
             <BrandLogo />
-            {!showBack && <span className="header__slogan">{BRAND.name}</span>}
           </button>
           {showBack && (
             <button type="button" className="header__back" onClick={onBack}>
@@ -69,7 +63,6 @@ export function Header({
         <SearchBar onSelectResult={(result) => onSearchResult?.(result)} />
 
         <div className="header__actions">
-          <MyCoursesMenu onSelectCourse={onSelectKhoaHoc} onViewAll={onViewMyCourses} />
           <NotificationsMenu
             onViewAll={onViewAllNotifications}
             onOpenNotification={onNotificationAction}

@@ -1,31 +1,19 @@
 .brand-logo {
-  display: grid;
-  place-items: center;
+  display: block;
   flex-shrink: 0;
-  background: linear-gradient(145deg, #f05123 0%, #e53935 100%);
-  color: #fff;
-  font-weight: 800;
-  line-height: 1;
-  box-shadow: 0 2px 8px rgba(240, 81, 35, 0.28);
+  width: auto;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .brand-logo--sm {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  font-size: 15px;
+  height: 28px;
 }
 
 .brand-logo--md {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  font-size: 18px;
+  height: 40px;
 }
 
 .brand-logo--lg {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  font-size: 20px;
+  height: 52px;
 }

@@ -1,5 +1,4 @@
 import {
-  faBookOpen,
   faBriefcase,
   faComments,
   faGraduationCap,
@@ -11,7 +10,7 @@ import {
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 
 export type RoadmapStep = {
-  khoaHocId: number
+  id: string
   title: string
   desc: string
 }
@@ -48,7 +47,6 @@ export const ROADMAPS: Roadmap[] = [
       { label: 'Hangul', icon: faLanguage },
       { label: 'Ngữ pháp', icon: faSpellCheck },
       { label: 'Giao tiếp', icon: faComments },
-      { label: 'Từ vựng', icon: faBookOpen },
     ],
     illustration: {
       gradient: 'linear-gradient(145deg, #ffecd2 0%, #fcb69f 55%, #f05123 120%)',
@@ -59,22 +57,22 @@ export const ROADMAPS: Roadmap[] = [
     outcome: 'Đọc Hangul trôi chảy, giao tiếp tình huống cơ bản',
     steps: [
       {
-        khoaHocId: 1,
+        id: 'hangul-basic',
         title: 'Hangul cơ bản',
         desc: 'Học bảng chữ cái, ghép âm tiết và đọc viết từ đơn giản.',
       },
       {
-        khoaHocId: 2,
+        id: 'korean-basic',
         title: 'Tiếng Hàn sơ cấp 1',
         desc: 'Ngữ pháp nền tảng, đuôi câu lịch sự và mẫu câu thường dùng.',
       },
       {
-        khoaHocId: 3,
+        id: 'daily-conversation',
         title: 'Giao tiếp hàng ngày',
         desc: 'Luyện hội thoại chào hỏi, hỏi đường, gọi món, mua sắm.',
       },
       {
-        khoaHocId: 4,
+        id: 'topik-grammar',
         title: 'Ngữ pháp TOPIK I',
         desc: 'Củng cố ngữ pháp sơ – trung cấp nhẹ, làm quen dạng đề.',
       },
@@ -98,28 +96,28 @@ export const ROADMAPS: Roadmap[] = [
     illustration: {
       gradient: 'linear-gradient(145deg, #7b2ff7 0%, #f107a3 70%, #ff6a00 140%)',
       mark: '漢',
-      caption: 'Pro',
+      caption: 'Nâng cao',
     },
     duration: '4–6 tháng',
     outcome: 'Đạt TOPIK 4–6, giao tiếp chuyên nghiệp hơn',
     steps: [
       {
-        khoaHocId: 5,
-        title: 'TOPIK Pro',
+        id: 'topik-advanced',
+        title: 'TOPIK nâng cao',
         desc: 'Luyện đề chuyên sâu, chữa viết luận và chiến lược từng kỹ năng.',
       },
       {
-        khoaHocId: 7,
+        id: 'native-speaking',
         title: 'Luyện nói với bản ngữ',
         desc: 'Phản xạ nói, phát âm và hội thoại thực tế 1-1.',
       },
       {
-        khoaHocId: 6,
+        id: 'business-korean',
         title: 'Tiếng Hàn thương mại',
         desc: 'Email, họp, thuyết trình và văn hóa doanh nghiệp Hàn.',
       },
       {
-        khoaHocId: 8,
+        id: 'interpretation',
         title: 'Biên phiên dịch Hàn',
         desc: 'Kỹ thuật dịch, thuật ngữ chuyên ngành và dự án thực hành.',
       },

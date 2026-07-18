@@ -114,20 +114,8 @@
   font-size: 14px;
 }
 
-.search-bar__kind--course {
-  background: #f05123;
-}
-
-.search-bar__kind--flashcard {
-  background: #0d9488;
-}
-
 .search-bar__kind--article {
   background: #2563eb;
-}
-
-.search-bar__kind--video {
-  background: #7c3aed;
 }
 
 .search-bar__kind--qa {

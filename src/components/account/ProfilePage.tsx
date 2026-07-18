@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { getMyCourses } from '../../data/myCourses'
 import { CURRENT_USER } from '../../data/user'
 import './ProfilePage.css'
 
@@ -20,14 +18,7 @@ function buildHeatmap(): boolean[][] {
 
 const HEATMAP = buildHeatmap()
 
-type ProfilePageProps = {
-  onSelectKhoaHoc?: (id: number) => void
-}
-
-export function ProfilePage({ onSelectKhoaHoc }: ProfilePageProps) {
-  const courses = getMyCourses()
-  const [tab, setTab] = useState<'courses' | 'posts'>('courses')
-
+export function ProfilePage() {
   return (
     <div className="profile-page">
       <div className="profile-page__layout">
@@ -65,63 +56,8 @@ export function ProfilePage({ onSelectKhoaHoc }: ProfilePageProps) {
             </div>
           </section>
 
-          <div className="profile-page__tabs" role="tablist">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={tab === 'courses'}
-              className={tab === 'courses' ? 'is-active' : ''}
-              onClick={() => setTab('courses')}
-            >
-              Khóa học đã đăng ký ({courses.length})
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={tab === 'posts'}
-              className={tab === 'posts' ? 'is-active' : ''}
-              onClick={() => setTab('posts')}
-            >
-              Bài viết đã đăng (0)
-            </button>
-          </div>
-
-          {tab === 'courses' ? (
-            <div className="profile-page__grid">
-              {courses.map((course) => (
-                <article
-                  key={course.id}
-                  className="profile-course-card"
-                  role={onSelectKhoaHoc ? 'button' : undefined}
-                  tabIndex={onSelectKhoaHoc ? 0 : undefined}
-                  onClick={() => onSelectKhoaHoc?.(course.id)}
-                  onKeyDown={(e) => {
-                    if (!onSelectKhoaHoc) return
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      onSelectKhoaHoc(course.id)
-                    }
-                  }}
-                >
-                  <div
-                    className="profile-course-card__thumb"
-                    style={{ background: course.gradient }}
-                  >
-                    <pre>{course.thumbTitle}</pre>
-                  </div>
-                  <h3>{course.title}</h3>
-                  <p className="profile-course-card__price">{course.price}</p>
-                  <div className="profile-course-card__meta">
-                    <span>{course.students} học viên</span>
-                    <span>{course.lessons} bài</span>
-                    <span>{course.duration}</span>
-                  </div>
-                </article>
-              ))}
-            </div>
-          ) : (
-            <p className="profile-page__empty">Chưa có bài viết nào.</p>
-          )}
+          <h2>Bài viết đã đăng</h2>
+          <p className="profile-page__empty">Chưa có bài viết nào.</p>
         </div>
       </div>
     </div>

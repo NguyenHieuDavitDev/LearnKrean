@@ -1,3 +1,4 @@
+import logoCct from '../../assets/logo cct.png'
 import { BRAND } from '../../brand'
 import './BrandLogo.css'
 
@@ -8,11 +9,10 @@ type BrandLogoProps = {
 
 export function BrandLogo({ size = 'md', className = '' }: BrandLogoProps) {
   return (
-    <span
+    <img
+      src={logoCct}
+      alt={BRAND.company}
       className={`brand-logo brand-logo--${size}${className ? ` ${className}` : ''}`}
-      aria-hidden="true"
-    >
-      {BRAND.mark}
-    </span>
+    />
   )
 }

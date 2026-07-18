@@ -1,5 +1,0 @@
-export { KhoaHocCard } from './CourseCard'
-export { KhoaHocDetail } from './CourseDetail'
-export { LearningPage } from './LearningPage'
-export { ProPage } from './ProPage'
-export { Stars, ProCrown } from './shared'

@@ -1,25 +1,21 @@
 import './Sidebar.css'
 
 type SidebarProps = {
-  active?: 'home' | 'pro' | 'articles' | 'videos' | 'roadmap' | 'qa' | 'flashcards' | string
+  active?: 'home' | 'articles' | 'roadmap' | 'qa' | 'about' | string
   onNavigateHome?: () => void
-  onNavigatePro?: () => void
   onNavigateArticles?: () => void
-  onNavigateVideos?: () => void
   onNavigateRoadmap?: () => void
   onNavigateQa?: () => void
-  onNavigateFlashcards?: () => void
+  onNavigateAbout?: () => void
 }
 
 export function Sidebar({
   active = 'home',
   onNavigateHome,
-  onNavigatePro,
   onNavigateArticles,
-  onNavigateVideos,
   onNavigateRoadmap,
   onNavigateQa,
-  onNavigateFlashcards,
+  onNavigateAbout,
 }: SidebarProps) {
   const navItems = [
     {
@@ -50,34 +46,6 @@ export function Sidebar({
       ),
     },
     {
-      id: 'pro',
-      label: 'Khóa Pro',
-      onClick: onNavigatePro,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M5 16.5l2.2-8.2L9.8 12l2.2-5.5L14.2 12l2.6-3.7L19 16.5H5z"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinejoin="round"
-          />
-          <path d="M5 18.5h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-    {
-      id: 'flashcards',
-      label: 'Từ vựng',
-      onClick: onNavigateFlashcards,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="4" y="5" width="12" height="16" rx="2" stroke="currentColor" strokeWidth="1.8" />
-          <path d="M8 5V4a1 1 0 0 1 1-1h9a2 2 0 0 1 2 2v14a1 1 0 0 1-1 1h-1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-          <path d="M7 10h6M7 14h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-    {
       id: 'articles',
       label: 'Bài viết',
       onClick: onNavigateArticles,
@@ -85,17 +53,6 @@ export function Sidebar({
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" strokeWidth="1.8" />
           <path d="M8 9h8M8 12h8M8 15h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-    {
-      id: 'videos',
-      label: 'Video',
-      onClick: onNavigateVideos,
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.8" />
-          <path d="M10 9.5v5l4.5-2.5L10 9.5z" fill="currentColor" />
         </svg>
       ),
     },
@@ -112,6 +69,18 @@ export function Sidebar({
             strokeLinejoin="round"
           />
           <path d="M9 8.5h6M9 11.5h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
+      ),
+    },
+    {
+      id: 'about',
+      label: 'Giới thiệu',
+      onClick: onNavigateAbout,
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.8" />
+          <path d="M12 11v5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          <circle cx="12" cy="8" r="1" fill="currentColor" />
         </svg>
       ),
     },

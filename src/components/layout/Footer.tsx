@@ -3,10 +3,11 @@ import { BrandLogo } from './BrandLogo'
 import './Footer.css'
 
 type FooterProps = {
-  onNavigateFlashcards?: () => void
+  onNavigateAbout?: () => void
+  onNavigateContact?: () => void
 }
 
-export function Footer({ onNavigateFlashcards }: FooterProps) {
+export function Footer({ onNavigateAbout, onNavigateContact }: FooterProps) {
   const [phone1, phone2] = BRAND.phones
 
   return (
@@ -38,8 +39,16 @@ export function Footer({ onNavigateFlashcards }: FooterProps) {
         <div className="footer__col">
           <h3>VỀ CHÚNG TÔI</h3>
           <ul>
-            <li><a href="#about">Giới thiệu</a></li>
-            <li><a href="#contact">Liên hệ</a></li>
+            <li>
+              <button type="button" className="footer__link-btn" onClick={onNavigateAbout}>
+                Giới thiệu
+              </button>
+            </li>
+            <li>
+              <button type="button" className="footer__link-btn" onClick={onNavigateContact}>
+                Liên hệ
+              </button>
+            </li>
             <li><a href="#terms">Điều khoản</a></li>
             <li><a href="#privacy">Bảo mật</a></li>
           </ul>
@@ -61,11 +70,6 @@ export function Footer({ onNavigateFlashcards }: FooterProps) {
             <li><a href="#dict">Từ điển Việt-Hàn</a></li>
             <li><a href="#keyboard">Bàn phím tiếng Hàn</a></li>
             <li><a href="#topik">Luyện đề TOPIK</a></li>
-            <li>
-              <button type="button" className="footer__link-btn" onClick={onNavigateFlashcards}>
-                Flashcard từ vựng
-              </button>
-            </li>
           </ul>
         </div>
 

@@ -50,7 +50,7 @@ export function RegisterPage({ onSuccess, onGoLogin }: RegisterPageProps) {
   return (
     <AuthShell
       title="Đăng ký tài khoản"
-      subtitle="Tạo tài khoản miễn phí để lưu tiến độ học và luyện flashcard."
+      subtitle="Tạo tài khoản miễn phí để lưu tiến độ học và theo dõi bài viết."
       footer={
         <>
           Đã có tài khoản?{' '}

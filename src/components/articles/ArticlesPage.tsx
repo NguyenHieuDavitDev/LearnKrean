@@ -2,7 +2,6 @@ import { useMemo, useState, type MouseEvent } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBookmark,
-  faCheck,
   faCheckCircle,
   faChevronLeft,
   faChevronRight,
@@ -135,32 +134,6 @@ export function ArticlesPage({ onSelectArticle, initialTopic = 'all' }: Articles
                 Tất cả
               </button>
             </div>
-          </section>
-
-          <section className="articles-page__promo">
-            <div className="articles-page__promo-media" aria-hidden="true">
-              <img src="https://i.pravatar.cc/240?img=5" alt="" />
-              <span className="articles-page__promo-badge">PRO</span>
-            </div>
-            <h2>TOPIK Pro</h2>
-            <p>Lộ trình nâng cao cùng {BRAND.shortName}</p>
-            <ul>
-              <li>
-                <FontAwesomeIcon icon={faCheck} />
-                Chiến lược đạt TOPIK 4–6
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faCheck} />
-                Chữa bài viết định kỳ
-              </li>
-              <li>
-                <FontAwesomeIcon icon={faCheck} />
-                Hỗ trợ học viên trọn đời
-              </li>
-            </ul>
-            <a href={`tel:${BRAND.phones[0].replace(/\s/g, '')}`} className="articles-page__promo-cta">
-              Tư vấn khóa Pro
-            </a>
           </section>
         </aside>
       </div>

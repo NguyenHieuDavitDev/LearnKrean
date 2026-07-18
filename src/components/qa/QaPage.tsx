@@ -49,7 +49,7 @@ export function QaPage({ onSelectQuestion }: QaPageProps) {
     <div className="qa-page">
       <header className="qa-page__intro">
         <h1>Hỏi và đáp</h1>
-        <p>Kênh hỏi đáp dành cho học viên {BRAND.name} — ưu tiên hỗ trợ học viên Pro.</p>
+        <p>Kênh hỏi đáp dành cho học viên {BRAND.name}.</p>
       </header>
 
       <div className="qa-page__toolbar">

@@ -148,7 +148,7 @@ export function QaDetail({ questionId, onBack }: QaDetailProps) {
           <h1 className="qa-detail__title">{question.title}</h1>
 
           <div className="qa-detail__tags">
-            <span className="qa-detail__course">KHÓA HỌC {question.courseTag}</span>
+            <span className="qa-detail__course">CHỦ ĐỀ {question.courseTag}</span>
             <span className={`qa-detail__status qa-detail__status--${question.status}`}>
               {question.status === 'resolved' ? (
                 <>
