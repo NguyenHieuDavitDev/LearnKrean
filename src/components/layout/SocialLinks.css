@@ -1,0 +1,126 @@
+.social-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.social-links--icons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-links--icons .social-links__item {
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.social-links--icons .social-links__item:hover {
+  box-shadow: none;
+  transform: translateY(-2px);
+}
+
+.social-links--icons .social-links__icon {
+  width: auto;
+  height: auto;
+  object-fit: unset;
+}
+
+.social-links--cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.social-links--cards .social-links__item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 76px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.social-links--cards .social-links__item:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-border);
+  box-shadow: 0 14px 32px rgba(240, 81, 35, 0.1);
+}
+
+.social-links--cards .social-links__icon {
+  flex-shrink: 0;
+}
+
+.social-links__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.social-links__text strong {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.social-links__text small {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.social-links--compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.social-links--compact .social-links__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px 0 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.social-links--compact .social-links__item:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 196, 174, 0.45);
+  transform: translateY(-1px);
+}
+
+.social-links--compact .social-links__icon {
+  flex-shrink: 0;
+}
+
+.social-links--compact .social-links__text strong {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .social-links--cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .social-links--cards .social-links__item {
+    min-height: 68px;
+    padding: 14px 16px;
+  }
+}

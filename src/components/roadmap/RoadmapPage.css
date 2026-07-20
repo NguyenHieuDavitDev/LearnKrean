@@ -206,6 +206,19 @@
   transform: translateY(-2px);
 }
 
+.roadmap-page__community-social {
+  margin-top: 18px;
+  max-width: 520px;
+}
+
+.roadmap-page__community-social > p {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 10px;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+
 @media (max-width: 960px) {
   .roadmap-page__grid {
     grid-template-columns: 1fr;

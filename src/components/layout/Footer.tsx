@@ -4,8 +4,9 @@ import {
   faLocationDot,
   faPhone,
 } from '@fortawesome/free-solid-svg-icons'
-import { BRAND } from '../../brand'
+import { BRAND, SOCIAL } from '../../brand'
 import { BrandLogo } from './BrandLogo'
+import { SocialPlatformIcon } from './SocialPlatformIcon'
 import './Footer.css'
 
 type FooterProps = {
@@ -159,21 +160,19 @@ export function Footer({
             © {year} {BRAND.name}. Thuộc {BRAND.company}
           </p>
           <div className="footer__social" aria-label="Mạng xã hội">
-            <a href="#youtube" aria-label="YouTube">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.8 15.5v-7l6.3 3.5-6.3 3.5z" />
-              </svg>
-            </a>
-            <a href="#facebook" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M14 8.2h2.4V5H14c-2.4 0-4 1.7-4 4.2V11H7.5v3.3H10V22h3.5v-7.7h2.7l.5-3.3H13.5V9.2c0-.6.3-1 1-1z" />
-              </svg>
-            </a>
-            <a href="#tiktok" aria-label="TikTok">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M19.6 8.4a6.5 6.5 0 0 1-3.7-1.2v7.1a5.7 5.7 0 1 1-4.9-5.6v2.9a2.9 2.9 0 1 0 2.1 2.8V2.5h2.8a6.5 6.5 0 0 0 3.7 5.5v.4z" />
-              </svg>
-            </a>
+            {SOCIAL.links.map((link) => (
+              <a
+                key={link.id}
+                className="footer__social-link"
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={link.label}
+                aria-label={`${link.label} — ${link.action}`}
+              >
+                <SocialPlatformIcon platform={link.id} size="md" />
+              </a>
+            ))}
           </div>
         </div>
       </div>

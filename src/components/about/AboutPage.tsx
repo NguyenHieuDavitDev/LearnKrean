@@ -4,6 +4,7 @@ import {
   faArrowRight,
   faBookOpen,
   faComments,
+  faExternalLink,
   faGraduationCap,
   faHandshake,
   faHeart,
@@ -11,8 +12,9 @@ import {
   faPhone,
   faSeedling,
 } from '@fortawesome/free-solid-svg-icons'
-import { BRAND } from '../../brand'
+import { BRAND, SOCIAL } from '../../brand'
 import { BrandLogo } from '../layout/BrandLogo'
+import { SocialPlatformIcon } from '../layout/SocialPlatformIcon'
 import aboutHeroImg from '../../assets/anhbiatrangvechungtoi.jpg'
 import contactImg from '../../assets/anh san sang lo trinh.jpg'
 import './AboutPage.css'
@@ -141,6 +143,10 @@ export function AboutPage({ onGoRoadmap, scrollTo = 'top' }: AboutPageProps) {
             Chương trình theo bộ Tiếng Hàn Tổng hợp dành cho người Việt Nam — từ Sơ cấp 1 đến Cao cấp
             2 — gắn mục tiêu TOPIK từng cấp. Tư vấn lộ trình tại trụ sở {BRAND.address}.
           </p>
+          <p>
+            Bạn cũng có thể theo dõi {BRAND.shortName} trên YouTube, TikTok và Facebook để xem bài giảng,
+            mẹo học và tham gia cộng đồng học viên online.
+          </p>
           <ul className="about-story__facts">
             <li>Trụ sở Huế</li>
             <li>TOPIK 1–6</li>
@@ -155,6 +161,46 @@ export function AboutPage({ onGoRoadmap, scrollTo = 'top' }: AboutPageProps) {
           <p className="about-story__aside-name">{BRAND.name}</p>
           <p className="about-story__aside-company">{BRAND.company}</p>
         </aside>
+      </section>
+
+      <section className="about-social" id="social" aria-labelledby="about-social-title">
+        <header className="about-social__intro">
+          <p className="about-eyebrow">Cộng đồng online</p>
+          <h2 id="about-social-title">Kênh học tiếng Hàn của {BRAND.shortName}</h2>
+          <p className="about-social__lead">{SOCIAL.intro}</p>
+          <p className="about-social__cta">{SOCIAL.cta}</p>
+        </header>
+
+        <ul className="about-social__channels">
+          {SOCIAL.links.map((channel) => (
+            <li key={channel.id} className={`about-social__channel about-social__channel--${channel.id}`}>
+              <div className="about-social__channel-head">
+                <span className="about-social__channel-icon">
+                  <SocialPlatformIcon platform={channel.id} size="lg" />
+                </span>
+                <div>
+                  <h3>{channel.label}</h3>
+                  <p className="about-social__channel-handle">{channel.handle}</p>
+                </div>
+              </div>
+              <p className="about-social__channel-desc">{channel.description}</p>
+              <ul className="about-social__highlights">
+                {channel.highlights.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <a
+                className="about-social__channel-link"
+                href={channel.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {channel.action}
+                <FontAwesomeIcon icon={faExternalLink} />
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="about-programs" aria-labelledby="about-programs-title">
@@ -251,6 +297,25 @@ export function AboutPage({ onGoRoadmap, scrollTo = 'top' }: AboutPageProps) {
                 </div>
               </li>
             </ul>
+            <div className="about-contact__social">
+              <p className="about-contact__social-title">Theo dõi trên mạng xã hội</p>
+              <p>{SOCIAL.cta}</p>
+              <ul className="about-contact__social-links">
+                {SOCIAL.links.map((channel) => (
+                  <li key={channel.id}>
+                    <a
+                      href={channel.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${channel.label} — ${channel.action}`}
+                    >
+                      <SocialPlatformIcon platform={channel.id} size="sm" />
+                      <span>{channel.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>

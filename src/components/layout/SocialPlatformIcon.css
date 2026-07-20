@@ -1,0 +1,55 @@
+.social-platform-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 12px;
+  color: #fff;
+}
+
+.social-platform-icon svg {
+  display: block;
+}
+
+.social-platform-icon--sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+}
+
+.social-platform-icon--sm svg {
+  width: 16px;
+  height: 16px;
+}
+
+.social-platform-icon--md {
+  width: 40px;
+  height: 40px;
+}
+
+.social-platform-icon--md svg {
+  width: 20px;
+  height: 20px;
+}
+
+.social-platform-icon--lg {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+}
+
+.social-platform-icon--lg svg {
+  width: 26px;
+  height: 26px;
+}
+
+.social-platform-icon--youtube {
+  background: #ff0000;
+}
+
+.social-platform-icon--tiktok {
+  background: #010101;
+}
+
+.social-platform-icon--facebook {
+  background: #1877f2;
+}

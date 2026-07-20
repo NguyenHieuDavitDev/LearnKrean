@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { BRAND } from '../../brand'
+import { BRAND, SOCIAL } from '../../brand'
 import { ROADMAPS } from '../../data/roadmaps'
 import communityImg from '../../assets/anh cong dong hoc vien.jpg'
+import { SocialLinks } from '../layout/SocialLinks'
 import './RoadmapPage.css'
 
 type RoadmapPageProps = {
@@ -80,6 +81,10 @@ export function RoadmapPage({ onSelectRoadmap }: RoadmapPageProps) {
             >
               Liên hệ tư vấn lộ trình
             </a>
+            <div className="roadmap-page__community-social">
+              <p>{SOCIAL.cta}</p>
+              <SocialLinks variant="compact" />
+            </div>
           </div>
         </div>
       </section>
