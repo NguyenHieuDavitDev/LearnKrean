@@ -3,6 +3,8 @@ import { faArrowRight, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { BRAND } from '../../brand'
 import { BrandLogo } from '../layout/BrandLogo'
 import { getFeaturedArticles } from '../../data/articles'
+import coverImg from '../../assets/anhbia.jpg'
+import inviteImg from '../../assets/anh san sang lo trinh.jpg'
 import './HomePage.css'
 
 type HomePageProps = {
@@ -24,21 +26,33 @@ export function HomePage({
   return (
     <div className="home-page">
       <section className="home-hero" aria-labelledby="home-hero-title">
-        <div className="home-hero__plane" aria-hidden="true">
-          <span className="home-hero__wash home-hero__wash--a" />
-          <span className="home-hero__wash home-hero__wash--b" />
-          <span className="home-hero__script">안녕하세요</span>
-          <span className="home-hero__mark">{BRAND.mark}</span>
+        <div className="home-hero__bg" aria-hidden="true">
+          <img
+            className="home-hero__photo"
+            src={coverImg}
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+          />
+          <div className="home-hero__shade" />
+          <span className="home-hero__script">{BRAND.name}</span>
         </div>
 
         <div className="home-hero__content">
+          <p className="home-hero__kicker">Giáo trình chuẩn · TOPIK 1–6 · Huế</p>
           <div className="home-hero__brand">
-            <BrandLogo size="lg" className="home-hero__logo" />
-            <p className="home-hero__brand-name">{BRAND.name}</p>
+            <span className="home-hero__logo-wrap">
+              <BrandLogo size="lg" className="home-hero__logo" />
+            </span>
+            <div>
+              <p className="home-hero__brand-name">{BRAND.name}</p>
+              <p className="home-hero__brand-slogan">{BRAND.slogan}</p>
+            </div>
           </div>
           <h1 id="home-hero-title">Học tiếng Hàn rõ ràng, gần gũi từng ngày</h1>
           <p className="home-hero__lead">
-            Lộ trình chọn lọc, bài viết thực tế và cộng đồng đồng hành cùng bạn.
+            Lộ trình chọn lọc, bài viết thực tế và cộng đồng đồng hành cùng bạn trên hành trình chinh
+            phục tiếng Hàn.
           </p>
           <div className="home-hero__actions">
             <button type="button" className="home-hero__cta" onClick={onGoRoadmap}>
@@ -125,19 +139,24 @@ export function HomePage({
         </section>
 
         <section className="home-invite" aria-labelledby="home-invite-title">
-          <div className="home-invite__copy">
-            <p className="home-kicker home-kicker--light">Bước tiếp theo</p>
-            <h2 id="home-invite-title">Chọn lộ trình phù hợp trình độ của bạn</h2>
-            <p>Từ Hangul cơ bản đến giao tiếp tự tin — học đúng thứ tự, tiến đều mỗi tuần.</p>
-            <button type="button" className="home-invite__cta" onClick={onGoRoadmap}>
-              Xem lộ trình học
-              <FontAwesomeIcon icon={faArrowRight} />
-            </button>
-          </div>
-          <div className="home-invite__visual" aria-hidden="true">
-            <span className="home-invite__glyph">가</span>
-            <span className="home-invite__glyph home-invite__glyph--b">나</span>
-            <span className="home-invite__glyph home-invite__glyph--c">다</span>
+          <img
+            className="home-invite__photo"
+            src={inviteImg}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="home-invite__shade" aria-hidden="true" />
+          <div className="home-invite__inner">
+            <div className="home-invite__copy">
+              <p className="home-kicker home-kicker--light">Bước tiếp theo</p>
+              <h2 id="home-invite-title">Chọn lộ trình phù hợp trình độ của bạn</h2>
+              <p>Từ Hangul cơ bản đến giao tiếp tự tin — học đúng thứ tự, tiến đều mỗi tuần.</p>
+              <button type="button" className="home-invite__cta" onClick={onGoRoadmap}>
+                Xem lộ trình học
+                <FontAwesomeIcon icon={faArrowRight} />
+              </button>
+            </div>
           </div>
         </section>
       </div>

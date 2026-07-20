@@ -13,6 +13,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { BRAND } from '../../brand'
 import { BrandLogo } from '../layout/BrandLogo'
+import aboutHeroImg from '../../assets/anhbiatrangvechungtoi.jpg'
+import contactImg from '../../assets/anh san sang lo trinh.jpg'
 import './AboutPage.css'
 
 type AboutPageProps = {
@@ -81,10 +83,15 @@ export function AboutPage({ onGoRoadmap, scrollTo = 'top' }: AboutPageProps) {
   return (
     <div className="about-page">
       <section className="about-hero" aria-labelledby="about-hero-title">
-        <div className="about-hero__atmosphere" aria-hidden="true">
-          <span className="about-hero__glow about-hero__glow--a" />
-          <span className="about-hero__glow about-hero__glow--b" />
-          <span className="about-hero__hangul">한글</span>
+        <div className="about-hero__bg" aria-hidden="true">
+          <img
+            className="about-hero__photo"
+            src={aboutHeroImg}
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+          />
+          <div className="about-hero__shade" />
         </div>
 
         <div className="about-hero__layout">
@@ -118,12 +125,6 @@ export function AboutPage({ onGoRoadmap, scrollTo = 'top' }: AboutPageProps) {
                 </button>
               )}
             </div>
-          </div>
-
-          <div className="about-hero__aside" aria-hidden="true">
-            <span className="about-hero__mark">
-              <BrandLogo size="lg" className="about-hero__mark-logo" />
-            </span>
           </div>
         </div>
       </section>
@@ -212,34 +213,46 @@ export function AboutPage({ onGoRoadmap, scrollTo = 'top' }: AboutPageProps) {
       </section>
 
       <section className="about-contact" id="contact" aria-labelledby="about-contact-title">
-        <div className="about-contact__copy">
-          <p className="about-eyebrow about-eyebrow--light">Liên hệ</p>
-          <h2 id="about-contact-title">Sẵn sàng chọn lộ trình phù hợp?</h2>
-          <p>
-            Đội ngũ {BRAND.shortName} hỗ trợ tư vấn cấp độ và lịch học theo mục tiêu TOPIK hoặc giao
-            tiếp của bạn.
-          </p>
+        <img
+          className="about-contact__photo"
+          src={contactImg}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="about-contact__shade" aria-hidden="true" />
+        <div className="about-contact__layout">
+          <div className="about-contact__panel">
+            <div className="about-contact__copy">
+              <p className="about-eyebrow about-eyebrow--light">Liên hệ</p>
+              <h2 id="about-contact-title">Sẵn sàng chọn lộ trình phù hợp?</h2>
+              <p>
+                Đội ngũ {BRAND.shortName} hỗ trợ tư vấn cấp độ và lịch học theo mục tiêu TOPIK hoặc giao
+                tiếp của bạn.
+              </p>
+            </div>
+            <ul className="about-contact__details">
+              <li>
+                <span className="about-contact__icon" aria-hidden="true">
+                  <FontAwesomeIcon icon={faPhone} />
+                </span>
+                <div>
+                  <strong>Điện thoại</strong>
+                  <a href={`tel:${BRAND.phones[0].replace(/\s/g, '')}`}>{BRAND.phoneDisplay}</a>
+                </div>
+              </li>
+              <li>
+                <span className="about-contact__icon" aria-hidden="true">
+                  <FontAwesomeIcon icon={faLocationDot} />
+                </span>
+                <div>
+                  <strong>Địa chỉ</strong>
+                  <span>{BRAND.address}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-        <ul className="about-contact__details">
-          <li>
-            <span className="about-contact__icon" aria-hidden="true">
-              <FontAwesomeIcon icon={faPhone} />
-            </span>
-            <div>
-              <strong>Điện thoại</strong>
-              <a href={`tel:${BRAND.phones[0].replace(/\s/g, '')}`}>{BRAND.phoneDisplay}</a>
-            </div>
-          </li>
-          <li>
-            <span className="about-contact__icon" aria-hidden="true">
-              <FontAwesomeIcon icon={faLocationDot} />
-            </span>
-            <div>
-              <strong>Địa chỉ</strong>
-              <span>{BRAND.address}</span>
-            </div>
-          </li>
-        </ul>
       </section>
     </div>
   )

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUsers } from '@fortawesome/free-solid-svg-icons'
 import { BRAND } from '../../brand'
 import { ROADMAPS } from '../../data/roadmaps'
+import communityImg from '../../assets/anh cong dong hoc vien.jpg'
 import './RoadmapPage.css'
 
 type RoadmapPageProps = {
@@ -58,26 +58,29 @@ export function RoadmapPage({ onSelectRoadmap }: RoadmapPageProps) {
         ))}
       </div>
 
-      <section className="roadmap-page__community">
-        <div className="roadmap-page__community-copy">
-          <h2>Tham gia cộng đồng học viên {BRAND.shortName}</h2>
-          <p>
-            Hỏi đáp bài tập, chia sẻ kinh nghiệm học tiếng Hàn và nhận hỗ trợ từ giảng viên cùng học
-            viên khác.
-          </p>
-          <a
-            href={`tel:${BRAND.phones[0].replace(/\s/g, '')}`}
-            className="roadmap-page__community-btn"
-          >
-            Liên hệ tư vấn lộ trình
-          </a>
-        </div>
-        <div className="roadmap-page__community-art" aria-hidden="true">
-          <span className="roadmap-page__bubble roadmap-page__bubble--a">
-            <FontAwesomeIcon icon={faUsers} />
-          </span>
-          <span className="roadmap-page__bubble roadmap-page__bubble--b">한글</span>
-          <span className="roadmap-page__bubble roadmap-page__bubble--c">TOPIK</span>
+      <section className="roadmap-page__community" aria-labelledby="roadmap-community-title">
+        <img
+          className="roadmap-page__community-photo"
+          src={communityImg}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="roadmap-page__community-shade" aria-hidden="true" />
+        <div className="roadmap-page__community-inner">
+          <div className="roadmap-page__community-copy">
+            <h2 id="roadmap-community-title">Tham gia cộng đồng học viên {BRAND.shortName}</h2>
+            <p>
+              Hỏi đáp bài tập, chia sẻ kinh nghiệm học tiếng Hàn và nhận hỗ trợ từ giảng viên cùng học
+              viên khác.
+            </p>
+            <a
+              href={`tel:${BRAND.phones[0].replace(/\s/g, '')}`}
+              className="roadmap-page__community-btn"
+            >
+              Liên hệ tư vấn lộ trình
+            </a>
+          </div>
         </div>
       </section>
     </div>
