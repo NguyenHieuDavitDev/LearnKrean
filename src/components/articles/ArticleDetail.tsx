@@ -45,7 +45,7 @@ export function ArticleDetail({ articleId, onBack, onSelectArticle }: ArticleDet
   const likeCount = article.likes + (liked ? 1 : 0)
 
   return (
-    <div className="article-detail">
+    <article className="article-detail" itemScope itemType="https://schema.org/Article">
       <div className="article-detail__layout">
         <aside className="article-detail__aside">
           <strong className="article-detail__aside-name">{article.author}</strong>
@@ -75,15 +75,17 @@ export function ArticleDetail({ articleId, onBack, onSelectArticle }: ArticleDet
         </aside>
 
         <div className="article-detail__main">
-          <h1 className="article-detail__title">{article.title}</h1>
+          <h1 className="article-detail__title" itemProp="headline">
+            {article.title}
+          </h1>
 
           <div className="article-detail__cover">
-            <img src={article.image} alt="" />
+            <img src={article.image} alt={article.title} itemProp="image" />
           </div>
 
           <div className="article-detail__head">
             <div className="article-detail__author">
-              <img src={article.avatar} alt="" />
+              <img src={article.avatar} alt={`Ảnh đại diện ${article.author}`} />
               <div>
                 <p className="article-detail__author-name">
                   {article.author}
@@ -91,9 +93,9 @@ export function ArticleDetail({ articleId, onBack, onSelectArticle }: ArticleDet
                     <FontAwesomeIcon icon={faCheckCircle} className="article-detail__verified" />
                   )}
                 </p>
-                <p className="article-detail__author-meta">
-                  {article.publishedAt} · {article.readTime}
-                </p>
+            <p className="article-detail__author-meta">
+              <time itemProp="datePublished">{article.publishedAt}</time> · {article.readTime}
+            </p>
               </div>
             </div>
             <div className="article-detail__head-actions">
@@ -111,7 +113,7 @@ export function ArticleDetail({ articleId, onBack, onSelectArticle }: ArticleDet
             </div>
           </div>
 
-          <div className="article-detail__body">
+          <div className="article-detail__body" itemProp="articleBody">
             {article.body.map((block, index) => {
               if (block.type === 'p') {
                 return <p key={index}>{block.text}</p>
@@ -210,6 +212,6 @@ export function ArticleDetail({ articleId, onBack, onSelectArticle }: ArticleDet
           </section>
         </div>
       </div>
-    </div>
+    </article>
   )
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Header } from './components/layout/Header'
 import { Sidebar } from './components/layout/Sidebar'
 import { MobileNav } from './components/layout/MobileNav'
@@ -9,74 +9,143 @@ import { ArticlesPage, ArticleDetail } from './components/articles'
 import { RoadmapPage, RoadmapDetail } from './components/roadmap'
 import { QaPage, QaDetail } from './components/qa'
 import type { SearchResult } from './data/search'
+import { applyRouteSeo } from './seo/meta'
+import {
+  buildPath,
+  parsePath,
+  routeFromAppState,
+  type AppRoute,
+  type Page,
+} from './seo/routes'
 import './App.css'
 
-type Page = 'home' | 'about' | 'articles' | 'roadmap' | 'qa'
+type AppState = {
+  page: Page
+  aboutScrollTo: 'top' | 'contact'
+  articleId: number | null
+  roadmapId: string | null
+  qaId: number | null
+}
+
+function routeToState(route: AppRoute): AppState {
+  return {
+    page: route.page,
+    aboutScrollTo: route.aboutScrollTo ?? 'top',
+    articleId: route.articleId ?? null,
+    roadmapId: route.roadmapId ?? null,
+    qaId: route.qaId ?? null,
+  }
+}
+
+function stateToRoute(state: AppState): AppRoute {
+  return routeFromAppState(state.page, {
+    aboutScrollTo: state.aboutScrollTo,
+    articleId: state.articleId,
+    roadmapId: state.roadmapId,
+    qaId: state.qaId,
+  })
+}
+
+function readRouteFromWindow(): AppRoute {
+  return parsePath(window.location.pathname, window.location.hash)
+}
 
 function App() {
-  const [page, setPage] = useState<Page>('home')
-  const [aboutScrollTo, setAboutScrollTo] = useState<'top' | 'contact'>('top')
-  const [articleId, setArticleId] = useState<number | null>(null)
-  const [roadmapId, setRoadmapId] = useState<string | null>(null)
-  const [qaId, setQaId] = useState<number | null>(null)
+  const [state, setState] = useState<AppState>(() => routeToState(readRouteFromWindow()))
 
-  const clearContent = () => {
-    setArticleId(null)
-    setRoadmapId(null)
-    setQaId(null)
-  }
+  const { page, aboutScrollTo, articleId, roadmapId, qaId } = state
+
+  const syncBrowserUrl = useCallback((next: AppState, replace = false) => {
+    const route = stateToRoute(next)
+    const path = buildPath(route)
+    const current = `${window.location.pathname}${window.location.hash}`
+    if (current !== path) {
+      window.history[replace ? 'replaceState' : 'pushState'](null, '', path)
+    }
+    applyRouteSeo(route)
+  }, [])
+
+  const navigate = useCallback(
+    (next: AppState) => {
+      setState(next)
+      syncBrowserUrl(next)
+    },
+    [syncBrowserUrl],
+  )
+
+  useEffect(() => {
+    applyRouteSeo(stateToRoute(state))
+  }, [])
+
+  useEffect(() => {
+    const onPopState = () => {
+      const next = routeToState(readRouteFromWindow())
+      setState(next)
+      applyRouteSeo(stateToRoute(next))
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
+
+  const clearContent = () => ({
+    articleId: null as number | null,
+    roadmapId: null as string | null,
+    qaId: null as number | null,
+  })
 
   const goHome = () => {
-    clearContent()
-    setPage('home')
+    navigate({ page: 'home', aboutScrollTo: 'top', ...clearContent() })
   }
 
   const goAbout = (focus: 'top' | 'contact' = 'top') => {
-    clearContent()
-    setAboutScrollTo(focus)
-    setPage('about')
+    navigate({ page: 'about', aboutScrollTo: focus, ...clearContent() })
   }
 
   const goArticles = () => {
-    clearContent()
-    setPage('articles')
+    navigate({ page: 'articles', aboutScrollTo: 'top', ...clearContent() })
   }
 
   const goRoadmap = () => {
-    clearContent()
-    setPage('roadmap')
+    navigate({ page: 'roadmap', aboutScrollTo: 'top', ...clearContent() })
   }
 
   const goQa = () => {
-    clearContent()
-    setPage('qa')
+    navigate({ page: 'qa', aboutScrollTo: 'top', ...clearContent() })
   }
 
   const selectArticle = (id: number) => {
-    setRoadmapId(null)
-    setQaId(null)
-    setArticleId(id)
+    navigate({
+      page: 'articles',
+      aboutScrollTo: 'top',
+      articleId: id,
+      roadmapId: null,
+      qaId: null,
+    })
   }
 
   const selectRoadmap = (id: string) => {
-    setArticleId(null)
-    setQaId(null)
-    setRoadmapId(id)
-    setPage('roadmap')
+    navigate({
+      page: 'roadmap',
+      aboutScrollTo: 'top',
+      articleId: null,
+      roadmapId: id,
+      qaId: null,
+    })
   }
 
   const selectQa = (id: number) => {
-    setArticleId(null)
-    setRoadmapId(null)
-    setQaId(id)
-    setPage('qa')
+    navigate({
+      page: 'qa',
+      aboutScrollTo: 'top',
+      articleId: null,
+      roadmapId: null,
+      qaId: id,
+    })
   }
 
   const handleSearchResult = (result: SearchResult) => {
-    clearContent()
     if (result.kind === 'article') {
       selectArticle(Number(result.targetId))
-      setPage('articles')
       return
     }
     if (result.kind === 'qa') {
@@ -103,18 +172,15 @@ function App() {
 
   const onBack = () => {
     if (articleId !== null) {
-      setArticleId(null)
-      setPage('articles')
+      goArticles()
       return
     }
     if (roadmapId !== null) {
-      setRoadmapId(null)
-      setPage('roadmap')
+      goRoadmap()
       return
     }
     if (qaId !== null) {
-      setQaId(null)
-      setPage('qa')
+      goQa()
       return
     }
     goHome()
@@ -144,7 +210,7 @@ function App() {
         onNavigateQa={goQa}
         onNavigateAbout={() => goAbout('top')}
       />
-      <main className="app__main">
+      <main className="app__main" id="main-content">
         {articleId !== null ? (
           <ArticleDetail
             key={articleId}
