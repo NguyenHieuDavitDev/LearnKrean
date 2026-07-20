@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { BRAND } from '../../brand'
 import { BrandLogo } from '../layout/BrandLogo'
-import { ARTICLES } from '../../data/articles'
+import { getFeaturedArticles } from '../../data/articles'
 import './HomePage.css'
 
 type HomePageProps = {
@@ -18,8 +18,8 @@ export function HomePage({
   onGoRoadmap,
   onGoAbout,
 }: HomePageProps) {
-  const featured = ARTICLES[0]
-  const moreArticles = ARTICLES.slice(1, 5)
+  const featured = getFeaturedArticles(undefined, 1)[0]
+  const moreArticles = getFeaturedArticles(featured?.id, 4)
 
   return (
     <div className="home-page">
@@ -79,10 +79,8 @@ export function HomePage({
                   }
                 }}
               >
-                <div className="home-feature__media" style={{ background: featured.image }}>
-                  <span aria-hidden="true">
-                    <FontAwesomeIcon icon={featured.icon} />
-                  </span>
+                <div className="home-feature__media">
+                  <img src={featured.image} alt="" />
                 </div>
                 <div className="home-feature__copy">
                   <p className="home-kicker">Nổi bật</p>
@@ -110,12 +108,8 @@ export function HomePage({
                     style={{ ['--i' as string]: index }}
                     onClick={() => onSelectArticle?.(article.id)}
                   >
-                    <span
-                      className="home-article-row__thumb"
-                      style={{ background: article.image }}
-                      aria-hidden="true"
-                    >
-                      <FontAwesomeIcon icon={article.icon} />
+                    <span className="home-article-row__thumb">
+                      <img src={article.image} alt="" loading="lazy" />
                     </span>
                     <span className="home-article-row__body">
                       <strong>{article.title}</strong>

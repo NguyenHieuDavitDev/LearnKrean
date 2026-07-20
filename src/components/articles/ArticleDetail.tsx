@@ -77,6 +77,10 @@ export function ArticleDetail({ articleId, onBack, onSelectArticle }: ArticleDet
         <div className="article-detail__main">
           <h1 className="article-detail__title">{article.title}</h1>
 
+          <div className="article-detail__cover">
+            <img src={article.image} alt="" />
+          </div>
+
           <div className="article-detail__head">
             <div className="article-detail__author">
               <img src={article.avatar} alt="" />
@@ -133,8 +137,8 @@ export function ArticleDetail({ articleId, onBack, onSelectArticle }: ArticleDet
               }
               return (
                 <figure key={index} className="article-detail__figure">
-                  <div className="article-detail__figure-media" style={{ background: block.gradient }}>
-                    <span>{block.label}</span>
+                  <div className="article-detail__figure-media">
+                    <img src={block.src} alt={block.alt} loading="lazy" />
                   </div>
                   <figcaption>{block.caption}</figcaption>
                 </figure>
@@ -189,12 +193,8 @@ export function ArticleDetail({ articleId, onBack, onSelectArticle }: ArticleDet
                     }
                   }}
                 >
-                  <div
-                    className="article-detail__featured-thumb"
-                    style={{ background: item.image }}
-                    aria-hidden="true"
-                  >
-                    <FontAwesomeIcon icon={item.icon} />
+                  <div className="article-detail__featured-thumb">
+                    <img src={item.image} alt="" loading="lazy" />
                   </div>
                   <div>
                     <h3>{item.title}</h3>

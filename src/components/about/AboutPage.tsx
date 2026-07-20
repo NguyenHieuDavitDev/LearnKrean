@@ -1,7 +1,10 @@
 import { useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+  faArrowRight,
+  faBookOpen,
   faComments,
+  faGraduationCap,
   faHandshake,
   faHeart,
   faLocationDot,
@@ -20,46 +23,47 @@ type AboutPageProps = {
 const VALUES = [
   {
     icon: faSeedling,
-    title: 'Nền tảng vững',
-    desc: 'Học đúng trình tự từ Hangul đến giao tiếp, không nhảy cóc.',
+    title: 'Lộ trình chuẩn',
+    desc: 'Bám sát giáo trình Tiếng Hàn Tổng hợp dành cho người Việt — từ Sơ cấp đến Cao cấp, tương ứng TOPIK 1–6.',
   },
   {
-    icon: faComments,
-    title: 'Thực tế mỗi ngày',
-    desc: 'Ưu tiên mẫu câu dùng được ngay trong đời sống và công việc.',
+    icon: faBookOpen,
+    title: 'Học đủ 4 kỹ năng',
+    desc: 'Mỗi bài gồm từ vựng, ngữ pháp và luyện nghe – nói – đọc – viết theo đúng cấu trúc giáo trình.',
   },
   {
     icon: faHandshake,
     title: 'Đồng hành sát sao',
-    desc: 'Giảng viên và cộng đồng sẵn sàng giải đáp khi bạn gặp khó.',
+    desc: 'Tư vấn trình độ đầu vào, giải đáp thắc mắc và điều chỉnh nhịp học phù hợp mục tiêu của bạn.',
   },
   {
     icon: faHeart,
-    title: 'Học vì yêu thích',
-    desc: 'Giữ nhịp học nhẹ nhàng, bền lâu — không chỉ để “chạy deadline”.',
+    title: 'Gần gũi – bền vững',
+    desc: 'Giữ tinh thần học nhẹ nhàng, rõ ràng, giúp bạn duy trì thói quen lâu dài thay vì học dồn.',
   },
 ] as const
 
-const MILESTONES = [
+const PROGRAMS = [
   {
-    year: '2018',
-    title: 'Khởi đầu tại Huế',
-    desc: 'Những lớp học nhỏ đầu tiên với mục tiêu giúp người mới đọc được Hangul.',
+    icon: faComments,
+    level: 'Sơ cấp',
+    title: 'TOPIK 1 – 2',
+    desc: 'Hangul, giao tiếp đời sống và hoàn thành giáo trình Sơ cấp 1 & 2.',
+    tone: 'a',
   },
   {
-    year: '2020',
-    title: 'Mở rộng trực tuyến',
-    desc: 'Mang lộ trình học tiếng Hàn đến học viên mọi miền qua nền tảng số.',
+    icon: faGraduationCap,
+    level: 'Trung cấp',
+    title: 'TOPIK 3 – 4',
+    desc: 'Ngữ pháp trung cấp, đọc – viết mở rộng theo giáo trình Trung cấp 1 & 2.',
+    tone: 'b',
   },
   {
-    year: '2023',
-    title: 'Cộng đồng lớn mạnh',
-    desc: 'Hàng nghìn học viên theo lộ trình cơ bản đến chuẩn bị TOPIK.',
-  },
-  {
-    year: 'Nay',
-    title: 'Tiếp tục đồng hành',
-    desc: `${BRAND.name} vẫn giữ tinh thần gần gũi, chất lượng và rõ ràng.`,
+    icon: faBookOpen,
+    level: 'Cao cấp',
+    title: 'TOPIK 5 – 6',
+    desc: 'Văn bản học thuật – xã hội, luyện đề và hoàn thiện Cao cấp 1 & 2.',
+    tone: 'c',
   },
 ] as const
 
@@ -78,63 +82,117 @@ export function AboutPage({ onGoRoadmap, scrollTo = 'top' }: AboutPageProps) {
     <div className="about-page">
       <section className="about-hero" aria-labelledby="about-hero-title">
         <div className="about-hero__atmosphere" aria-hidden="true">
-          <span className="about-hero__orb about-hero__orb--a" />
-          <span className="about-hero__orb about-hero__orb--b" />
+          <span className="about-hero__glow about-hero__glow--a" />
+          <span className="about-hero__glow about-hero__glow--b" />
           <span className="about-hero__hangul">한글</span>
-          <span className="about-hero__hangul about-hero__hangul--soft">사랑</span>
         </div>
 
-        <div className="about-hero__content">
-          <div className="about-hero__brand">
-            <BrandLogo size="lg" className="about-hero__logo" />
-            <p className="about-hero__brand-name">{BRAND.name}</p>
+        <div className="about-hero__layout">
+          <div className="about-hero__content">
+            <p className="about-hero__kicker">{BRAND.company}</p>
+            <div className="about-hero__brand">
+              <span className="about-hero__logo-wrap">
+                <BrandLogo size="lg" className="about-hero__logo" />
+              </span>
+              <div className="about-hero__titles">
+                <h1 id="about-hero-title">{BRAND.name}</h1>
+                <p className="about-hero__slogan">{BRAND.slogan}</p>
+              </div>
+            </div>
+            <p className="about-hero__lead">
+              Giáo trình chuẩn dành cho người Việt · Lộ trình TOPIK 1–6 · Đồng hành đến mục tiêu thực
+              tế.
+            </p>
+            <div className="about-hero__actions">
+              <a className="about-hero__cta" href={`tel:${BRAND.phones[0].replace(/\s/g, '')}`}>
+                Liên hệ tư vấn
+              </a>
+              {onGoRoadmap && (
+                <button
+                  type="button"
+                  className="about-hero__cta about-hero__cta--ghost"
+                  onClick={onGoRoadmap}
+                >
+                  Xem lộ trình TOPIK
+                  <FontAwesomeIcon icon={faArrowRight} />
+                </button>
+              )}
+            </div>
           </div>
-          <h1 id="about-hero-title">Học tiếng Hàn gần gũi, rõ ràng và bền vững</h1>
-          <p className="about-hero__lead">
-            Chúng tôi đồng hành cùng bạn từ những chữ cái đầu tiên đến giao tiếp tự tin.
-          </p>
-          <div className="about-hero__actions">
-            <a
-              className="about-hero__cta"
-              href={`tel:${BRAND.phones[0].replace(/\s/g, '')}`}
-            >
-              Liên hệ tư vấn
-            </a>
-            {onGoRoadmap && (
-              <button type="button" className="about-hero__cta about-hero__cta--ghost" onClick={onGoRoadmap}>
-                Xem lộ trình học
-              </button>
-            )}
+
+          <div className="about-hero__aside" aria-hidden="true">
+            <span className="about-hero__mark">
+              <BrandLogo size="lg" className="about-hero__mark-logo" />
+            </span>
           </div>
         </div>
       </section>
 
       <section className="about-story" aria-labelledby="about-story-title">
-        <div className="about-story__visual" aria-hidden="true">
-          <div className="about-story__frame">
-            <span className="about-story__mark">{BRAND.mark}</span>
-            <p>{BRAND.slogan}</p>
-          </div>
-        </div>
         <div className="about-story__copy">
-          <p className="about-eyebrow">Câu chuyện</p>
-          <h2 id="about-story-title">Vì sao chúng tôi tồn tại</h2>
+          <p className="about-eyebrow">Về chúng tôi</p>
+          <h2 id="about-story-title">Đơn vị đào tạo tiếng Hàn tại Huế</h2>
           <p>
-            Nhiều người muốn học tiếng Hàn nhưng bị choáng bởi quá nhiều nguồn, thiếu lộ trình và
-            dễ bỏ cuộc giữa chừng. {BRAND.shortName} ra đời để rút ngắn khoảng cách đó: nội dung
-            chọn lọc, thứ tự học hợp lý, và sự đồng hành thật sự.
+            {BRAND.name} thuộc {BRAND.company}. Chúng tôi giúp người Việt học tiếng Hàn đúng trình
+            tự, dễ hiểu và dùng được ngay trong học tập, thi cử và đời sống.
           </p>
           <p>
-            Thuộc {BRAND.company}, chúng tôi đặt trụ sở tại {BRAND.address} — nơi kết nối học viên
-            yêu thích tiếng Hàn, văn hóa và cơ hội học tập, làm việc liên quan đến Hàn Quốc.
+            Chương trình theo bộ Tiếng Hàn Tổng hợp dành cho người Việt Nam — từ Sơ cấp 1 đến Cao cấp
+            2 — gắn mục tiêu TOPIK từng cấp. Tư vấn lộ trình tại trụ sở {BRAND.address}.
           </p>
+          <ul className="about-story__facts">
+            <li>Trụ sở Huế</li>
+            <li>TOPIK 1–6</li>
+            <li>Giáo trình chuẩn</li>
+          </ul>
         </div>
+
+        <aside className="about-story__aside">
+          <div className="about-story__portrait">
+            <BrandLogo size="lg" className="about-story__logo" />
+          </div>
+          <p className="about-story__aside-name">{BRAND.name}</p>
+          <p className="about-story__aside-company">{BRAND.company}</p>
+        </aside>
+      </section>
+
+      <section className="about-programs" aria-labelledby="about-programs-title">
+        <header className="about-section-head">
+          <p className="about-eyebrow">Chương trình</p>
+          <h2 id="about-programs-title">Ba cấp độ · sáu lộ trình TOPIK</h2>
+          <p className="about-section-head__desc">
+            Liên thông từ sơ cấp đến cao cấp — mỗi bước bám giáo trình và mục tiêu kỳ thi.
+          </p>
+        </header>
+        <ul className="about-programs__list">
+          {PROGRAMS.map((item, index) => (
+            <li key={item.title} className={`about-programs__item about-programs__item--${item.tone}`}>
+              <span className="about-programs__index" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span className="about-programs__icon" aria-hidden="true">
+                <FontAwesomeIcon icon={item.icon} />
+              </span>
+              <p className="about-programs__level">{item.level}</p>
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+            </li>
+          ))}
+        </ul>
+        {onGoRoadmap && (
+          <div className="about-programs__cta">
+            <button type="button" className="about-programs__btn" onClick={onGoRoadmap}>
+              Xem chi tiết 6 lộ trình
+              <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </div>
+        )}
       </section>
 
       <section className="about-values" aria-labelledby="about-values-title">
-        <header className="about-section-head">
+        <header className="about-section-head about-section-head--center">
           <p className="about-eyebrow">Phương châm</p>
-          <h2 id="about-values-title">Cách chúng tôi đồng hành cùng bạn</h2>
+          <h2 id="about-values-title">Cam kết khi học cùng {BRAND.shortName}</h2>
         </header>
         <ul className="about-values__list">
           {VALUES.map((item, index) => (
@@ -146,51 +204,36 @@ export function AboutPage({ onGoRoadmap, scrollTo = 'top' }: AboutPageProps) {
               <span className="about-values__icon" aria-hidden="true">
                 <FontAwesomeIcon icon={item.icon} />
               </span>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
             </li>
           ))}
         </ul>
       </section>
 
-      <section className="about-timeline" aria-labelledby="about-timeline-title">
-        <header className="about-section-head">
-          <p className="about-eyebrow">Hành trình</p>
-          <h2 id="about-timeline-title">Từ lớp nhỏ đến cộng đồng học viên</h2>
-        </header>
-        <ol className="about-timeline__list">
-          {MILESTONES.map((item) => (
-            <li key={item.year} className="about-timeline__item">
-              <span className="about-timeline__year">{item.year}</span>
-              <div className="about-timeline__body">
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
       <section className="about-contact" id="contact" aria-labelledby="about-contact-title">
         <div className="about-contact__copy">
           <p className="about-eyebrow about-eyebrow--light">Liên hệ</p>
-          <h2 id="about-contact-title">Sẵn sàng bắt đầu cùng {BRAND.shortName}?</h2>
+          <h2 id="about-contact-title">Sẵn sàng chọn lộ trình phù hợp?</h2>
           <p>
-            Gọi điện hoặc ghé thăm để được tư vấn lộ trình phù hợp trình độ và mục tiêu của bạn.
+            Đội ngũ {BRAND.shortName} hỗ trợ tư vấn cấp độ và lịch học theo mục tiêu TOPIK hoặc giao
+            tiếp của bạn.
           </p>
         </div>
         <ul className="about-contact__details">
           <li>
-            <FontAwesomeIcon icon={faPhone} aria-hidden />
+            <span className="about-contact__icon" aria-hidden="true">
+              <FontAwesomeIcon icon={faPhone} />
+            </span>
             <div>
               <strong>Điện thoại</strong>
               <a href={`tel:${BRAND.phones[0].replace(/\s/g, '')}`}>{BRAND.phoneDisplay}</a>
             </div>
           </li>
           <li>
-            <FontAwesomeIcon icon={faLocationDot} aria-hidden />
+            <span className="about-contact__icon" aria-hidden="true">
+              <FontAwesomeIcon icon={faLocationDot} />
+            </span>
             <div>
               <strong>Địa chỉ</strong>
               <span>{BRAND.address}</span>

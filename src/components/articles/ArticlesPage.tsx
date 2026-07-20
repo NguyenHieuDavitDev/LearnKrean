@@ -51,11 +51,12 @@ export function ArticlesPage({ onSelectArticle, initialTopic = 'all' }: Articles
     <div className="articles-page">
       <div className="articles-page__layout">
         <div className="articles-page__main">
-          <header className="articles-page__intro">
+          <header className="articles-page__intro page-intro">
+            <p className="page-intro__kicker">Đọc & học</p>
             <h1>Bài viết nổi bật</h1>
             <p>
-              Tổng hợp bài viết về từ vựng, ngữ pháp, TOPIK và giao tiếp — chọn lọc để bạn học tiếng
-              Hàn hiệu quả hơn cùng {BRAND.shortName}.
+              Tổng hợp bài về du học, cuộc sống tại Hàn, học phí trường đại học, TOPIK và giao tiếp — chọn
+              lọc để bạn học tiếng Hàn hiệu quả hơn cùng {BRAND.shortName}.
             </p>
           </header>
 
@@ -202,12 +203,8 @@ function ArticleFeedCard({
             <span>{article.readTime}</span>
           </div>
         </div>
-        <div
-          className="article-feed-card__thumb"
-          style={{ background: article.image }}
-          aria-hidden="true"
-        >
-          <FontAwesomeIcon icon={article.icon} />
+        <div className="article-feed-card__thumb">
+          <img src={article.image} alt="" loading="lazy" />
         </div>
       </div>
     </article>

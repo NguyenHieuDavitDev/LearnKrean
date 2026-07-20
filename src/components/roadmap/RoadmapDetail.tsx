@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faClock, faFlag } from '@fortawesome/free-solid-svg-icons'
-import { getRoadmapById } from '../../data/roadmaps'
+import { faCheck, faClock, faFlag, faBook } from '@fortawesome/free-solid-svg-icons'
+import { getAdjacentRoadmaps, getRoadmapById } from '../../data/roadmaps'
 import './RoadmapDetail.css'
 
 type RoadmapDetailProps = {
@@ -16,6 +16,7 @@ export function RoadmapDetail({
   onSelectRoadmap,
 }: RoadmapDetailProps) {
   const roadmap = getRoadmapById(roadmapId)
+  const { prev, next } = getAdjacentRoadmaps(roadmapId)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -32,7 +33,12 @@ export function RoadmapDetail({
     )
   }
 
-  const otherId = roadmap.id === 'basic' ? 'advanced' : 'basic'
+  const bandLabel =
+    roadmap.level <= 2
+      ? 'Sơ cấp · TOPIK I'
+      : roadmap.level <= 4
+        ? 'Trung cấp · TOPIK II'
+        : 'Cao cấp · TOPIK II'
 
   return (
     <div className="roadmap-detail">
@@ -46,10 +52,9 @@ export function RoadmapDetail({
 
       <header className="roadmap-detail__hero">
         <div className="roadmap-detail__hero-copy">
-          <p className="roadmap-detail__eyebrow">
-            {roadmap.level === 'basic' ? 'Từ số 0' : 'Bứt phá chuyên sâu'}
-          </p>
+          <p className="roadmap-detail__eyebrow">{bandLabel}</p>
           <h1>{roadmap.title}</h1>
+          <p className="roadmap-detail__textbook">{roadmap.textbook}</p>
           <p className="roadmap-detail__lead">{roadmap.longDescription}</p>
           <ul className="roadmap-detail__facts">
             <li>
@@ -59,6 +64,10 @@ export function RoadmapDetail({
             <li>
               <FontAwesomeIcon icon={faFlag} />
               Mục tiêu: {roadmap.outcome}
+            </li>
+            <li>
+              <FontAwesomeIcon icon={faBook} />
+              Vốn từ: {roadmap.vocabHint}
             </li>
           </ul>
           <div className="roadmap-detail__skills">
@@ -80,24 +89,29 @@ export function RoadmapDetail({
       </header>
 
       <section className="roadmap-detail__section">
-        <h2>Các bước trong lộ trình</h2>
+        <h2>Các bài trong giáo trình</h2>
         <p className="roadmap-detail__section-desc">
-          Thực hiện lần lượt từng chặng bên dưới để xây nền tảng vững và tiến bộ đều.
+          Học lần lượt theo từng bài của <strong>{roadmap.textbook}</strong>. Mỗi bài gồm từ vựng,
+          ngữ pháp và luyện 4 kỹ năng nghe – nói – đọc – viết. {roadmap.scoreHint}.
         </p>
         <ol className="roadmap-detail__steps">
           {roadmap.steps.map((step, index) => (
-              <li key={step.id} className="roadmap-detail__step">
-                <div className="roadmap-detail__step-index" aria-hidden="true">
-                  {index + 1}
+            <li key={step.id} className="roadmap-detail__step">
+              <div className="roadmap-detail__step-index" aria-hidden="true">
+                {index + 1}
+              </div>
+              <div className="roadmap-detail__step-body">
+                <div className="roadmap-detail__step-head">
+                  <h3>{step.title}</h3>
                 </div>
-                <div className="roadmap-detail__step-body">
-                  <div className="roadmap-detail__step-head">
-                    <h3>{step.title}</h3>
-                  </div>
-                  <p>{step.desc}</p>
-                </div>
-              </li>
-            ))}
+                <p>{step.desc}</p>
+                <p className="roadmap-detail__grammar">
+                  <span>Ngữ pháp</span>
+                  {step.grammar}
+                </p>
+              </div>
+            </li>
+          ))}
         </ol>
       </section>
 
@@ -106,7 +120,7 @@ export function RoadmapDetail({
         <ul className="roadmap-detail__outcomes">
           <li>
             <FontAwesomeIcon icon={faCheck} />
-            Lộ trình rõ ràng từ {roadmap.level === 'basic' ? 'mới bắt đầu' : 'trung cấp'} đến mục tiêu
+            Hoàn thành {roadmap.textbook}
           </li>
           <li>
             <FontAwesomeIcon icon={faCheck} />
@@ -114,12 +128,31 @@ export function RoadmapDetail({
           </li>
           <li>
             <FontAwesomeIcon icon={faCheck} />
-            Có thể chuyển sang lộ trình {roadmap.id === 'basic' ? 'nâng cao' : 'cơ bản'} khi cần
+            Vốn từ mục tiêu: {roadmap.vocabHint}
           </li>
         </ul>
-        <button type="button" className="roadmap-detail__switch" onClick={() => onSelectRoadmap(otherId)}>
-          Xem lộ trình {roadmap.id === 'basic' ? 'Nâng cao' : 'Cơ bản'}
-        </button>
+        <div className="roadmap-detail__nav">
+          {prev ? (
+            <button
+              type="button"
+              className="roadmap-detail__switch"
+              onClick={() => onSelectRoadmap(prev.id)}
+            >
+              ← {prev.shortTitle}
+            </button>
+          ) : (
+            <span />
+          )}
+          {next ? (
+            <button
+              type="button"
+              className="roadmap-detail__switch"
+              onClick={() => onSelectRoadmap(next.id)}
+            >
+              {next.shortTitle}  đến 
+            </button>
+          ) : null}
+        </div>
       </section>
     </div>
   )

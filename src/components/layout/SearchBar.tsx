@@ -4,6 +4,7 @@ import {
   faBookOpen,
   faComments,
   faMagnifyingGlass,
+  faRoute,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons'
 import {
@@ -21,6 +22,7 @@ type SearchBarProps = {
 const KIND_ICON: Record<SearchResultKind, typeof faBookOpen> = {
   article: faBookOpen,
   qa: faComments,
+  roadmap: faRoute,
 }
 
 export function SearchBar({ onSelectResult }: SearchBarProps) {
@@ -85,7 +87,7 @@ export function SearchBar({ onSelectResult }: SearchBarProps) {
       <input
         ref={inputRef}
         type="search"
-        placeholder="Tìm bài viết, câu hỏi..."
+        placeholder="Tìm bài viết, lộ trình, câu hỏi..."
         aria-label="Tìm kiếm"
         aria-autocomplete="list"
         aria-controls={listId}

@@ -11,12 +11,13 @@ type RoadmapPageProps = {
 export function RoadmapPage({ onSelectRoadmap }: RoadmapPageProps) {
   return (
     <div className="roadmap-page">
-      <header className="roadmap-page__intro">
+      <header className="roadmap-page__intro page-intro">
+        <p className="page-intro__kicker">Theo giáo trình chuẩn</p>
         <h1>Lộ trình học</h1>
         <p>
-          Để bắt đầu một cách thuận lợi, bạn nên tập trung vào một lộ trình học. Lộ trình từ{' '}
-          <strong>cơ bản đến nâng cao</strong> sẽ giúp bạn học đúng trình tự, tránh lan man và đạt mục
-          tiêu rõ ràng hơn tại {BRAND.name}.
+          Sáu lộ trình bám sát bộ{' '}
+          <strong>Tiếng Hàn Tổng hợp dành cho người Việt Nam</strong> (Sơ cấp 1  đến  Cao cấp 2) — từng
+          bài cụ thể, ngữ pháp rõ ràng, hướng tới TOPIK 1–6 tại {BRAND.name}.
         </p>
       </header>
 
@@ -24,8 +25,12 @@ export function RoadmapPage({ onSelectRoadmap }: RoadmapPageProps) {
         {ROADMAPS.map((roadmap) => (
           <article key={roadmap.id} className="roadmap-card">
             <div className="roadmap-card__content">
+              <p className="roadmap-card__exam">{roadmap.textbook}</p>
               <h2>{roadmap.title}</h2>
               <p>{roadmap.description}</p>
+              <p className="roadmap-card__meta">
+                {roadmap.steps.length} bài · {roadmap.duration}
+              </p>
               <div className="roadmap-card__skills" aria-label="Kỹ năng trong lộ trình">
                 {roadmap.skills.map((skill) => (
                   <span key={skill.label} className="roadmap-card__skill" title={skill.label}>

@@ -326,7 +326,7 @@ const QA_DETAIL_EXTRA: Record<
   },
   4: {
     content:
-      'Em làm bài chia đuôi: 가다 → 가요, 먹다 → 먹어요, 하다 → 해요. Phần 하다 em còn hơi phân vân — cô/các bạn check giúp em với ạ.',
+      'Em làm bài chia đuôi: 가다  đến  가요, 먹다  đến  먹어요, 하다  đến  해요. Phần 하다 em còn hơi phân vân — cô/các bạn check giúp em với ạ.',
     lesson: '04.15 Bài tập chia đuôi câu',
     timeAgo: '2 ngày trước',
     comments: [
@@ -335,7 +335,7 @@ const QA_DETAIL_EXTRA: Record<
         author: 'Minh Hàn',
         avatar: 'https://i.pravatar.cc/40?img=11',
         time: '1 ngày trước',
-        content: 'Phần 하다 → 해요 đúng rồi. Nhớ quy tắc đặc biệt của 하다 nhé.',
+        content: 'Phần 하다  đến  해요 đúng rồi. Nhớ quy tắc đặc biệt của 하다 nhé.',
         likes: 3,
       },
     ],

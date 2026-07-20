@@ -1,5 +1,5 @@
 .roadmap-detail {
-  max-width: 1100px;
+  max-width: var(--content-width);
   margin: 0 auto;
   padding-bottom: 48px;
 }
@@ -51,6 +51,13 @@
 .roadmap-detail__hero h1 {
   font-size: clamp(24px, 3vw, 32px);
   font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.roadmap-detail__textbook {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
   margin-bottom: 12px;
 }
 
@@ -199,6 +206,27 @@
   margin-bottom: 10px;
 }
 
+.roadmap-detail__grammar {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--primary-soft);
+  border: 1px solid var(--primary-border);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.roadmap-detail__grammar span {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
 .roadmap-detail__step-meta {
   display: flex;
   flex-wrap: wrap;
@@ -256,6 +284,13 @@
 .roadmap-detail__outcomes .svg-inline--fa {
   color: var(--primary);
   margin-top: 3px;
+}
+
+.roadmap-detail__nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
 }
 
 .roadmap-detail__switch {

@@ -1,5 +1,0 @@
-export { SettingsPage, type SettingsTab } from './SettingsPage'
-export { ProfilePage } from './ProfilePage'
-export { WriteBlogPage } from './WriteBlogPage'
-export { MyPostsPage } from './MyPostsPage'
-export { SavedPostsPage } from './SavedPostsPage'

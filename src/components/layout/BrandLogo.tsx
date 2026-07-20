@@ -1,4 +1,4 @@
-import logoCct from '../../assets/logo cct.png'
+import logoCct from '../../assets/logo cty cct.png'
 import { BRAND } from '../../brand'
 import './BrandLogo.css'
 
