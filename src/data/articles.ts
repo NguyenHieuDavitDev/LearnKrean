@@ -14,6 +14,7 @@ import {
   faUsers,
   faUtensils,
   faWallet,
+  faStar,
 } from '@fortawesome/free-solid-svg-icons'
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 
@@ -63,8 +64,12 @@ const articleFiles = import.meta.glob<{ default: string }>(
   '../assets/articles/*.jpg',
   { eager: true },
 )
+const universityFiles = import.meta.glob<{ default: string }>(
+  '../assets/University/*.{jpg,jpeg,png,webp,gif}',
+  { eager: true },
+)
 const avatarFiles = import.meta.glob<{ default: string }>(
-  '../assets/avatars/*.jpg',
+  '../assets/avatars/*.{jpg,jpeg,png,webp}',
   { eager: true },
 )
 
@@ -74,9 +79,21 @@ function articleImg(name: string) {
   return mod.default
 }
 
+function uniImg(name: string) {
+  const mod = universityFiles[`../assets/University/${name}`]
+  if (!mod) throw new Error(`Missing university image: ${name}`)
+  return mod.default
+}
+
 function avatarImg(n: number) {
   const mod = avatarFiles[`../assets/avatars/avatar-${n}.jpg`]
   if (!mod) throw new Error(`Missing avatar: ${n}`)
+  return mod.default
+}
+
+function coHuyenAvatar() {
+  const mod = avatarFiles[`../assets/avatars/avt co huyen.jpg`]
+  if (!mod) throw new Error('Missing avatar: avt co huyen.jpg')
   return mod.default
 }
 
@@ -978,78 +995,273 @@ const ARTICLES_DATA: Article[] = [
     avatar: avatarImg(12),
     verified: true,
     publishedAt: 'Vừa xong',
-    readTime: '16 phút đọc',
+    readTime: '22 phút đọc',
     likes: 112,
     comments: 18,
-    image: articleImg('hangul-city.jpg'),
+    image: uniImg('du-hoc-Dai-hoc-Quoc-gia-Seoul.gif'),
     icon: faGraduationCap,
     excerpt:
-      'Danh sách trường quốc lập & tư thục có học phí và học bổng tốt, kèm mức phí tham khảo và lưu ý khi chọn trường.',
+      'Giới thiệu chi tiết từng trường quốc lập và tư thục phổ biến với du học sinh Việt: học phí, thế mạnh ngành, đời sống và học bổng.',
     body: [
       {
         type: 'p',
-        text: '“Học phí tốt” không chỉ là rẻ — mà là cân bằng giữa chi phí, chất lượng đào tạo, học bổng cho sinh viên quốc tế và cơ hội việc làm sau tốt nghiệp. Dưới đây là các nhóm trường phổ biến với du học sinh Việt, kèm mức học phí tham khảo (won/học kỳ, chương trình đại học, 2024–2025).',
+        text: 'Chọn trường đại học ở Hàn không chỉ nhìn học phí “rẻ nhất”. Bạn cần cân bằng giữa chi phí, chất lượng đào tạo, học bổng cho sinh viên quốc tế, môi trường sống và cơ hội việc làm sau tốt nghiệp. Bài viết này liệt kê các trường phổ biến với người Việt, kèm hình ảnh khuôn viên và mô tả chi tiết từng trường.',
       },
       {
         type: 'emphasis',
-        text: 'Trường quốc lập (국립) vùng tỉnh thường rẻ nhất: 1,8–3,5 triệu won/học kỳ. Trường tư ở Seoul: 4–8 triệu won/học kỳ. Luôn kiểm tra học phí mới nhất trên website trường.',
+        text: 'Mức học phí dưới đây là tham khảo cho chương trình đại học (2024–2025), đơn vị won/học kỳ. Trường quốc lập vùng thường khoảng 1,8–3,5 triệu won. Trường tư ở Seoul thường 4–8 triệu won. Luôn kiểm tra lại trên website tuyển sinh quốc tế của trường trước khi nộp hồ sơ.',
       },
       {
         type: 'p',
-        text: 'Nhóm 1 — Trường quốc lập vùng (học phí thấp, sinh hoạt rẻ):',
+        text: 'Nhóm 1 — Trường quốc lập vùng: học phí thấp, sinh hoạt rẻ hơn Seoul',
+      },
+      {
+        type: 'image',
+        src: uniImg('DH Chonnam.jpeg'),
+        caption: 'Đại học Quốc gia Chonnam (전남대학교) — Gwangju',
+        alt: 'Đại học Quốc gia Chonnam',
+      },
+      {
+        type: 'p',
+        text: 'Đại học Quốc gia Chonnam (Chonnam National University) nằm tại Gwangju — thành phố lớn phía nam với cộng đồng sinh viên Việt khá đông. Học phí khoảng 2,0–2,8 triệu won/học kỳ. Chi phí thuê nhà và ăn uống thường thấp hơn Seoul khoảng 20–30%, nên tổng chi phí cả năm dễ kiểm soát hơn cho gia đình.',
       },
       {
         type: 'list',
         items: [
-          'Đại học Quốc gia Chonnam (전남대, Gwangju): ~2,0–2,8 triệu won/học kỳ — nhiều người Việt, chi phí ăn ở thấp hơn Seoul 20–30%.',
-          'Đại học Quốc gia Pusan (부산대, Busan): ~2,2–3,0 triệu won/học kỳ — trường top vùng, gần biển, phù hợp ngành kỹ thuật, kinh tế.',
-          'Đại học Quốc gia Chungnam (충남대, Daejeon): ~2,0–2,9 triệu won/học kỳ — thành phố khoa học, ít đông đúc hơn Seoul.',
-          'Đại học Quốc gia Jeonbuk (전북대, Jeonju): ~1,9–2,7 triệu won/học kỳ — văn hóa ẩm thực nổi tiếng, học phí cạnh tranh.',
-          'Đại học Quốc gia Kangwon (강원대): ~1,8–2,6 triệu won/học kỳ — môi trường thiên nhiên, phù hợp du học sinh thích yên tĩnh.',
-        ],
-      },
-      {
-        type: 'p',
-        text: 'Nhóm 2 — Trường quốc lập/ công lập lớn (uy tín cao, học phí vừa phải):',
-      },
-      {
-        type: 'list',
-        items: [
-          'Đại học Quốc gia Seoul (서울대, SNU): ~2,4–4,0 triệu won/học kỳ — top 1 Hàn, cạnh tranh khốc liệt, học bổng GKS và học bổng trường hấp dẫn.',
-          'Đại học Quốc gia Seoul (서울시립대): ~2,5–3,5 triệu won/học kỳ — ở Seoul nhưng học phí quốc lập, ít đắt hơn tư thục.',
-          'Đại học Incheon (인천대): ~2,3–3,2 triệu won/học kỳ — gần sân bay, phí sinh hoạt thấp hơn trung tâm Seoul.',
+          'Thế mạnh: kỹ thuật, nông nghiệp, y khoa, giáo dục — nhiều ngành có phòng lab và thực tập thực tế.',
+          'Đời sống: Gwangju có tàu điện ngầm, siêu thị, khu ăn uống gần ký túc xá; khí hậu ấm hơn Seoul vào mùa đông.',
+          'Phù hợp với ai: muốn tiết kiệm chi phí, thích môi trường vừa đủ đô thị nhưng không quá đông như thủ đô.',
+          'Lưu ý: TOPIK thường yêu cầu từ cấp 3 trở lên tùy ngành; hỏi rõ học bổng nhập học dành cho sinh viên quốc tế.',
         ],
       },
       {
         type: 'image',
-        src: articleImg('topik-desk.jpg'),
-        caption: 'Học phí chỉ là một phần — hãy tính thêm nhà ở, bảo hiểm, sách vở và chi phí xin visa khi so sánh trường.',
-        alt: 'Bàn học và sách giáo trình',
+        src: uniImg('DH Pusan.jpeg'),
+        caption: 'Đại học Quốc gia Pusan (부산대학교) — Busan',
+        alt: 'Đại học Quốc gia Pusan',
       },
       {
         type: 'p',
-        text: 'Nhóm 3 — Trường tư thục có học bổng nhập học mạnh (học phí cao hơn nhưng có thể giảm 30–100%):',
+        text: 'Đại học Quốc gia Pusan (Pusan National University) là một trong những trường quốc lập hàng đầu vùng. Học phí khoảng 2,2–3,0 triệu won/học kỳ. Busan là thành phố cảng lớn thứ hai Hàn Quốc — gần biển, có tàu điện ngầm, sân bay và nhiều cơ hội thực tập ngành logistics, kỹ thuật, kinh tế biển.',
       },
       {
         type: 'list',
         items: [
-          'Đại học Kyung Hee (경희대): học phí ~4,5–7 triệu won/học kỳ — học bổng TOPIK 3–6 giảm 30–70% phổ biến.',
-          'Đại học Chung-Ang (중앙대): ~5–7,5 triệu won/học kỳ — mạnh ngành truyền thông, nghệ thuật; học bổng theo kỳ đầu.',
-          'Đại học Hankuk ngoại ngữ (HUFS): ~4–6,5 triệu won/học kỳ — phù hợp ngành ngôn ngữ, quan hệ quốc tế.',
-          'Đại học Soongsil (숭실대): ~3,8–5,5 triệu won/học kỳ — IT, kinh doanh; học bổng nhập học cho sinh viên quốc tế tương đối dễ xin.',
+          'Thế mạnh: kỹ thuật, cơ khí, kinh tế, hải dương học, ngôn ngữ.',
+          'Đời sống: sống tại Busan vừa có nhịp đô thị vừa gần biển; tiền thuê nhà trung bình thấp hơn Seoul nhưng cao hơn một số tỉnh nhỏ.',
+          'Phù hợp với ai: muốn học trường “top vùng”, thích thành phố năng động và không nhất thiết phải ở Seoul.',
+          'Lưu ý: một số khoa cạnh tranh cao; chuẩn bị GPA và TOPIK sớm để tăng tỷ lệ trúng tuyển.',
+        ],
+      },
+      {
+        type: 'image',
+        src: uniImg('Dai-hoc-Quoc-gia-Chungnam-1.jpg'),
+        caption: 'Đại học Quốc gia Chungnam (충남대학교) — Daejeon',
+        alt: 'Đại học Quốc gia Chungnam',
+      },
+      {
+        type: 'p',
+        text: 'Đại học Quốc gia Chungnam (Chungnam National University) ở Daejeon — thành phố khoa học và công nghệ của Hàn. Học phí khoảng 2,0–2,9 triệu won/học kỳ. Daejeon ít đông đúc hơn Seoul, đi lại thuận tiện bằng KTX về thủ đô khoảng 1 giờ, phù hợp sinh viên muốn cân bằng học tập và chi phí.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Thế mạnh: công nghệ thông tin, kỹ thuật, khoa học tự nhiên, nghiên cứu gắn với viện khoa học quanh thành phố.',
+          'Đời sống: yên tĩnh hơn Seoul, nhiều ký túc xá và nhà trọ quanh khuôn viên; chi phí ăn uống hợp lý.',
+          'Phù hợp với ai: theo ngành STEM, thích môi trường học tập tập trung, muốn tiết kiệm tiền nhà.',
+          'Lưu ý: kiểm tra ngành có chương trình tiếng Anh hay bắt buộc TOPIK cao; chuẩn bị kế hoạch học tập rõ ràng khi nộp hồ sơ.',
+        ],
+      },
+      {
+        type: 'image',
+        src: uniImg('dai-hoc-hang-dau-han-quoc-chonbuk.jpg'),
+        caption: 'Đại học Quốc gia Jeonbuk (전북대학교) — Jeonju',
+        alt: 'Đại học Quốc gia Jeonbuk',
+      },
+      {
+        type: 'p',
+        text: 'Đại học Quốc gia Jeonbuk (Jeonbuk National University) đặt tại Jeonju — thành phố nổi tiếng với ẩm thực và văn hóa truyền thống. Học phí khoảng 1,9–2,7 triệu won/học kỳ, thuộc nhóm cạnh tranh về chi phí trong các trường quốc lập vùng. Nhiều sinh viên Việt chọn Jeonbuk vì vừa học được vừa trải nghiệm văn hóa địa phương.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Thế mạnh: nông nghiệp, sinh học, giáo dục, kỹ thuật cơ bản; môi trường nghiên cứu ổn định.',
+          'Đời sống: Jeonju có hanok village, món ăn địa phương phong phú; chi phí sống thường thấp hơn thành phố lớn.',
+          'Phù hợp với ai: muốn học phí mềm, thích nhịp sống chậm hơn Seoul/Busan.',
+          'Lưu ý: giao thông nội thành nhỏ hơn đô thị lớn — nên chọn chỗ ở gần trường hoặc gần tuyến bus chính.',
+        ],
+      },
+      {
+        type: 'image',
+        src: uniImg('Truong-Dai-hoc-Quoc-gia-Kangwon-Han-Quoc.png'),
+        caption: 'Đại học Quốc gia Kangwon (강원대학교) — Gangwon',
+        alt: 'Đại học Quốc gia Kangwon',
+      },
+      {
+        type: 'p',
+        text: 'Đại học Quốc gia Kangwon (Kangwon National University) nằm ở tỉnh Gangwon với môi trường thiên nhiên nhiều núi và không khí trong lành. Học phí khoảng 1,8–2,6 triệu won/học kỳ — thường thuộc nhóm thấp nhất trong danh sách này. Phù hợp sinh viên thích yên tĩnh, tập trung học và tiết kiệm tối đa chi phí sinh hoạt.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Thế mạnh: lâm nghiệp, môi trường, nông nghiệp, y tế cộng đồng, một số ngành kỹ thuật.',
+          'Đời sống: mùa đông lạnh và có tuyết; cần chuẩn bị áo ấm và chi phí sưởi. Ít khu vui chơi lớn như Seoul.',
+          'Phù hợp với ai: ưu tiên học phí thấp, thích thiên nhiên, không cần nhịp sống thành phố lớn.',
+          'Lưu ý: hỏi rõ cơ hội thực tập và việc làm sau tốt nghiệp theo ngành; một số ngành cần đi Seoul/Busan để thực tập.',
+        ],
+      },
+      {
+        type: 'p',
+        text: 'Nhóm 2 — Trường quốc lập / công lập lớn: uy tín cao, học phí vẫn vừa phải',
+      },
+      {
+        type: 'image',
+        src: uniImg('du-hoc-Dai-hoc-Quoc-gia-Seoul.gif'),
+        caption: 'Đại học Quốc gia Seoul (서울대학교, SNU)',
+        alt: 'Đại học Quốc gia Seoul (SNU)',
+      },
+      {
+        type: 'p',
+        text: 'Đại học Quốc gia Seoul (Seoul National University — SNU) là trường top 1 Hàn Quốc về uy tín học thuật. Học phí quốc lập khoảng 2,4–4,0 triệu won/học kỳ — không đắt bằng nhiều trường tư, nhưng cạnh tranh đầu vào rất cao. Sinh viên quốc tế thường nhắm học bổng GKS hoặc học bổng trường vì hồ sơ cần GPA, TOPIK và kế hoạch học tập mạnh.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Thế mạnh: hầu hết ngành đều mạnh; nghiên cứu, y khoa, kỹ thuật, khoa học xã hội đều có thứ hạng cao.',
+          'Đời sống: khuôn viên Gwanak rộng; sống ở Seoul chi phí nhà đắt — nên tính kỹ tổng ngân sách, không chỉ học phí.',
+          'Phù hợp với ai: hồ sơ xuất sắc, muốn bằng cấp có trọng số cao khi xin việc hoặc học tiếp thạc sĩ/tiến sĩ.',
+          'Lưu ý: nộp sớm, chuẩn bị TOPIK 4–5 (tùy ngành), viết study plan rõ ràng; nên có trường “an toàn” dự phòng.',
+        ],
+      },
+      {
+        type: 'image',
+        src: uniImg('Đại học Quốc gia Seoul 서울시립대.jpeg'),
+        caption: 'Đại học Thành phố Seoul (서울시립대학교)',
+        alt: 'Đại học Thành phố Seoul (서울시립대)',
+      },
+      {
+        type: 'p',
+        text: 'Đại học Thành phố Seoul (University of Seoul, 서울시립대) là trường công lập do thành phố Seoul quản lý. Học phí khoảng 2,5–3,5 triệu won/học kỳ — thấp hơn nhiều trường tư trong cùng thành phố. Đây là lựa chọn hấp dẫn nếu bạn muốn học và sống tại Seoul nhưng không muốn đóng học phí tư thục cao.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Thế mạnh: quản lý đô thị, hành chính công, kinh tế, kỹ thuật đô thị, môi trường.',
+          'Đời sống: ở Seoul nên đi lại, thực tập và networking thuận tiện; tiền nhà vẫn là khoản lớn nhất.',
+          'Phù hợp với ai: muốn “học Seoul với học phí công lập”, quan tâm ngành gắn thành phố và chính sách công.',
+          'Lưu ý: phân biệt rõ với Seoul National University (서울대); tên tiếng Việt dễ nhầm — luôn ghi đúng tên Hàn trên hồ sơ.',
+        ],
+      },
+      {
+        type: 'image',
+        src: uniImg('Toan-canh-Dai-hoc-Quoc-gia-Incheon-1.jpg'),
+        caption: 'Đại học Incheon (인천대학교) — Incheon',
+        alt: 'Đại học Incheon',
+      },
+      {
+        type: 'p',
+        text: 'Đại học Incheon (Incheon National University) nằm gần khu vực sân bay Incheon và thành phố cửa ngõ quốc tế. Học phí khoảng 2,3–3,2 triệu won/học kỳ. Sinh hoạt phí thường thấp hơn trung tâm Seoul, đồng thời vẫn tiếp cận được thủ đô bằng tàu trong khoảng 1 giờ tùy tuyến.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Thế mạnh: logistics, thương mại quốc tế, kỹ thuật, ngôn ngữ — gắn với vị trí cảng và sân bay.',
+          'Đời sống: tiện cho người mới sang (gần sân bay); có khu đô thị mới Songdo hiện đại.',
+          'Phù hợp với ai: muốn tiết kiệm hơn Seoul trung tâm, quan tâm ngành logistics/thương mại.',
+          'Lưu ý: kiểm tra khuôn viên chính của ngành bạn học (một số cơ sở cách nhau); hỏi rõ chính sách ký túc xá năm đầu.',
+        ],
+      },
+      {
+        type: 'p',
+        text: 'Nhóm 3 — Trường tư thục: học phí cao hơn nhưng học bổng nhập học mạnh',
+      },
+      {
+        type: 'image',
+        src: uniImg('kuyng-hee-university.jpg'),
+        caption: 'Đại học Kyung Hee (경희대학교)',
+        alt: 'Đại học Kyung Hee',
+      },
+      {
+        type: 'p',
+        text: 'Đại học Kyung Hee (Kyung Hee University) là trường tư thục nổi tiếng với khuôn viên đẹp và nhiều sinh viên quốc tế. Học phí khoảng 4,5–7 triệu won/học kỳ, nhưng học bổng theo TOPIK 3–6 thường giảm 30–70% học phí nếu duy trì GPA đủ điều kiện. Nhiều bạn Việt chọn Kyung Hee vì vừa có thương hiệu vừa có cơ hội giảm học phí rõ ràng.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Thế mạnh: quản trị khách sạn – du lịch, y học cổ truyền, nghệ thuật, quan hệ quốc tế, kinh doanh.',
+          'Đời sống: có cơ sở Seoul và cơ sở gần Suwon/Global Campus tùy ngành; hỏi rõ bạn học campus nào.',
+          'Phù hợp với ai: có TOPIK khá, muốn học bổng tư thục và môi trường quốc tế.',
+          'Lưu ý: học bổng thường gắn GPA mỗi kỳ — dưới mức quy định có thể mất giảm học phí ở kỳ sau.',
+        ],
+      },
+      {
+        type: 'image',
+        src: uniImg('truong-dai-hoc-chung-ang-han-quoc-1.jpg'),
+        caption: 'Đại học Chung-Ang (중앙대학교)',
+        alt: 'Đại học Chung-Ang',
+      },
+      {
+        type: 'p',
+        text: 'Đại học Chung-Ang (Chung-Ang University) mạnh về truyền thông, báo chí, điện ảnh, nghệ thuật biểu diễn và một số ngành kinh doanh. Học phí khoảng 5–7,5 triệu won/học kỳ. Trường thường có học bổng nhập học cho sinh viên quốc tế trong kỳ đầu; sau đó xét theo kết quả học tập.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Thế mạnh: media, film, advertising, theater, business — phù hợp bạn muốn làm sáng tạo/truyền thông.',
+          'Đời sống: khu vực Seoul, dễ tiếp cận studio, thực tập báo đài và công ty truyền thông.',
+          'Phù hợp với ai: hồ sơ thiên về portfolio/năng khiếu (một số ngành) hoặc muốn môi trường năng động ở thủ đô.',
+          'Lưu ý: ngành nghệ thuật có thể yêu cầu audition hoặc portfolio; đọc kỹ hướng dẫn tuyển sinh từng khoa.',
+        ],
+      },
+      {
+        type: 'image',
+        src: uniImg('DH Hankuk NN (HUFS).webp'),
+        caption: 'Đại học Hankuk Ngoại ngữ (한국외국어대학교, HUFS)',
+        alt: 'Đại học Hankuk Ngoại ngữ (HUFS)',
+      },
+      {
+        type: 'p',
+        text: 'Đại học Hankuk Ngoại ngữ (Hankuk University of Foreign Studies — HUFS) là lựa chọn quen thuộc với người Việt theo ngành ngôn ngữ, phiên dịch, quan hệ quốc tế và khu vực học. Học phí khoảng 4–6,5 triệu won/học kỳ. Sinh viên được học trong môi trường đa ngôn ngữ, dễ kết nối thực tập biên phiên dịch hoặc tổ chức quốc tế.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Thế mạnh: ngoại ngữ (gồm tiếng Việt), quan hệ quốc tế, thương mại quốc tế, thông dịch.',
+          'Đời sống: cơ sở Seoul và Global Campus (Yongin) tùy khoa — bắt buộc xác nhận đúng campus trước khi nộp.',
+          'Phù hợp với ai: yêu thích ngôn ngữ, ngoại giao, truyền thông đa văn hóa; đã có nền tiếng Hàn tốt.',
+          'Lưu ý: ngành ngôn ngữ đòi hỏi luyện nói và viết nhiều; TOPIK cao giúp xin học bổng và theo kịp bài giảng.',
+        ],
+      },
+      {
+        type: 'image',
+        src: uniImg('DH Soongsil .jpeg'),
+        caption: 'Đại học Soongsil (숭실대학교)',
+        alt: 'Đại học Soongsil',
+      },
+      {
+        type: 'p',
+        text: 'Đại học Soongsil (Soongsil University) nổi bật ở các ngành IT, phần mềm, kinh doanh và kỹ thuật ứng dụng. Học phí khoảng 3,8–5,5 triệu won/học kỳ — thường mềm hơn một số trường tư “top tên tuổi” trong Seoul. Học bổng nhập học cho sinh viên quốc tế tương đối dễ tiếp cận hơn nếu hồ sơ đạt ngưỡng TOPIK và GPA tối thiểu.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Thế mạnh: công nghệ thông tin, khoa học máy tính, kinh doanh, kỹ thuật điện – điện tử.',
+          'Đời sống: khu vực Seoul, thuận tiện thực tập công ty IT và startup; chi phí nhà vẫn cần dự trù cao.',
+          'Phù hợp với ai: muốn học IT/kinh doanh với học phí tư thục vừa phải và cơ hội học bổng nhập học.',
+          'Lưu ý: ngành IT cạnh tranh điểm; nên chuẩn bị toán và tư duy lập trình trước khi nhập học.',
         ],
       },
       {
         type: 'emphasis',
-        text: 'Cách chọn trường “đáng tiền”: tính tổng học phí và tiền nhà ở tại thành phố đó; xem tỷ lệ sinh viên quốc tế thực sự nhận được học bổng; kiểm tra ngành học có cơ hội thực tập và xin visa làm việc E-7 sau tốt nghiệp hay không.',
+        text: 'Cách chọn trường “đáng tiền”: cộng học phí + tiền nhà + bảo hiểm + sách vở theo thành phố đó; đọc điều kiện duy trì học bổng; kiểm tra ngành có thực tập và khả năng xin visa làm việc E-7 sau tốt nghiệp hay không.',
       },
       {
         type: 'p',
-        text: 'Lưu ý khi nghe tư vấn viên: “học phí 100% miễn” thường gắn điều kiện GPA (điểm trung bình) mỗi học kỳ — nếu dưới 3.0/4.5 có thể mất học bổng. Hỏi rõ điều kiện duy trì, phí nhập học một lần (입학금, 500.000–1.000.000 won), và phí đăng ký môn.',
+        text: 'Lưu ý khi nghe tư vấn: lời hứa “học phí 100% miễn” thường gắn GPA tối thiểu mỗi học kỳ (ví dụ 3.0/4.5). Nếu điểm dưới mức quy định, học bổng có thể bị cắt. Hỏi rõ phí nhập học một lần (입학금, khoảng 500.000–1.000.000 won), phí đăng ký môn và chính sách rút hồ sơ.',
       },
       {
         type: 'p',
-        text: 'Nguồn tra cứu chính thức: Study in Korea (studyinkorea.go.kr), mục tuyển sinh quốc tế trên website từng trường, và cổng nộp hồ sơ trực tuyến (nhiều trường dùng Uway, Jinhak). Nên nộp 3–5 trường ở các mức: một trường mơ ước, hai trường vừa sức, một đến hai trường an toàn.',
+        text: 'Nguồn tra cứu chính thức: Study in Korea (studyinkorea.go.kr), trang tuyển sinh quốc tế của từng trường, và cổng nộp hồ sơ (Uway, Jinhak…). Nên nộp 3–5 trường theo mức: một trường mơ ước, hai trường vừa sức, một đến hai trường an toàn. Nếu cần tư vấn lộ trình tiếng Hàn trước khi du học, liên hệ Cô Huyền Tiếng Hàn tại Huế.',
       },
     ],
   },
@@ -1478,11 +1690,525 @@ const ARTICLES_DATA: Article[] = [
       },
     ],
   },
+  {
+    id: 23,
+    title: 'Học tiếng Hàn tại Huế',
+    topic: 'other',
+    author: 'Cô Huyền',
+    authorUrl: 'https://tienghancohuyen.vn/author/co-huyen',
+    avatar: coHuyenAvatar(),
+    verified: true,
+    publishedAt: 'Vừa xong',
+    readTime: '11 phút đọc',
+    likes: 76,
+    comments: 12,
+    image: articleImg('hue-korean.jpg'),
+    icon: faLanguage,
+    excerpt:
+      'Vì sao nên học tiếng Hàn tại Huế, lộ trình TOPIK 1–6 theo giáo trình chuẩn và cách chọn lớp phù hợp mục tiêu của bạn.',
+    body: [
+      {
+        type: 'p',
+        text: 'Huế ngày càng nhiều bạn trẻ học tiếng Hàn — có người muốn thi TOPIK để du học, có người chuẩn bị EPS-TOPIK xuất khẩu lao động, cũng có người chỉ cần giao tiếp cơ bản. Học tại chỗ giúp bạn tiết kiệm chi phí so với lên Hà Nội hay TP.HCM, đồng thời vẫn bám giáo trình chuẩn dành cho người Việt.',
+      },
+      {
+        type: 'emphasis',
+        text: 'Tại Cô Huyền Tiếng Hàn (thuộc Công ty TNHH Cổng Chiến Thắng), chương trình theo bộ Tiếng Hàn Tổng hợp dành cho người Việt Nam — từ Sơ cấp đến Cao cấp, gắn mục tiêu TOPIK 1–6.',
+      },
+      {
+        type: 'image',
+        src: articleImg('hue-classroom.jpg'),
+        caption: 'Lớp học tiếng Hàn tại Huế: kết hợp bảng bài, giáo trình giấy và luyện nghe – nói trực tiếp với giảng viên.',
+        alt: 'Lớp học tiếng Hàn tại trung tâm ở Huế',
+      },
+      {
+        type: 'p',
+        text: 'Lợi ích khi học tiếng Hàn tại Huế:',
+      },
+      {
+        type: 'list',
+        items: [
+          'Gần nhà, dễ duy trì lịch học 2–4 buổi/tuần thay vì học dồn rồi bỏ giữa chừng.',
+          'Chi phí sinh hoạt và học phí thường mềm hơn các thành phố lớn.',
+          'Được tư vấn trình độ đầu vào và chọn lộ trình TOPIK hoặc EPS phù hợp mục tiêu.',
+          'Có cộng đồng học viên cùng thành phố — hỏi đáp bài tập, luyện nói theo nhóm.',
+        ],
+      },
+      {
+        type: 'p',
+        text: 'Nên bắt đầu như thế nào?',
+      },
+      {
+        type: 'list',
+        items: [
+          'Nếu chưa biết Hangul: học bảng chữ cái 1–2 tuần, rồi vào Sơ cấp 1 (TOPIK 1).',
+          'Nếu đã biết đọc viết cơ bản: làm bài kiểm tra đầu vào để xếp đúng Sơ cấp 1 hoặc 2.',
+          'Nếu mục tiêu du học: ưu tiên TOPIK 3–4 trong 12–18 tháng, kết hợp luyện đề.',
+          'Nếu mục tiêu EPS-TOPIK: tập trung từ vựng nghề nghiệp, nghe hiệu lệnh và đề mẫu vòng 1–2.',
+        ],
+      },
+      {
+        type: 'p',
+        text: 'Lịch học thực tế thường chia: buổi tối trong tuần cho người đi làm, cuối tuần cho học sinh – sinh viên. Mỗi bài nên có từ vựng, ngữ pháp, luyện nghe và nói — tránh chỉ học lý thuyết trên giấy.',
+      },
+      {
+        type: 'emphasis',
+        text: 'Địa chỉ tư vấn: 33/79 Phùng Lưu, phường Thanh Thuỷ, TP Huế. Điện thoại: 0945 201599 – 0913 801 599.',
+      },
+      {
+        type: 'p',
+        text: 'Ngoài lớp trực tiếp, bạn có thể theo dõi kênh YouTube, TikTok và nhóm Facebook của Cô Huyền để ôn bài, xem mẹo học và cập nhật lịch khai giảng.',
+      },
+    ],
+  },
+  {
+    id: 24,
+    title: 'Học tiếng Hàn ở đâu tại Huế?',
+    topic: 'other',
+    author: 'Cô Huyền',
+    authorUrl: 'https://tienghancohuyen.vn/author/co-huyen',
+    avatar: coHuyenAvatar(),
+    verified: true,
+    publishedAt: 'Vừa xong',
+    readTime: '10 phút đọc',
+    likes: 68,
+    comments: 9,
+    image: articleImg('hue-classroom.jpg'),
+    icon: faBuilding,
+    excerpt:
+      'Gợi ý cách chọn trung tâm tiếng Hàn tại Huế: giáo trình, giảng viên, lộ trình TOPIK/EPS và những câu hỏi nên hỏi trước khi đăng ký.',
+    body: [
+      {
+        type: 'p',
+        text: 'Nếu bạn đang tìm chỗ học tiếng Hàn ở Huế, đừng chỉ nhìn học phí rẻ nhất. Hãy so sánh giáo trình, kinh nghiệm giảng viên, sĩ số lớp và lộ trình có gắn TOPIK hoặc EPS-TOPIK hay không — vì đây mới quyết định bạn tiến bộ đều hay học rồi quên.',
+      },
+      {
+        type: 'p',
+        text: 'Tiêu chí chọn trung tâm tiếng Hàn tại Huế:',
+      },
+      {
+        type: 'list',
+        items: [
+          'Giáo trình: nên theo bộ Tiếng Hàn Tổng hợp dành cho người Việt (Sơ cấp 1 đến Cao cấp 2) hoặc giáo trình tương đương có bài tập rõ ràng.',
+          'Giảng viên: có kinh nghiệm giảng dạy, hiểu lỗi phổ biến của người Việt (phát âm, trật tự câu, kính ngữ).',
+          'Lộ trình: có chia cấp TOPIK 1–2, 3–4, 5–6 hoặc EPS; có kiểm tra đầu vào và đầu ra.',
+          'Sĩ số: lớp 8–15 học viên dễ luyện nói hơn lớp quá đông.',
+          'Hỗ trợ: tư vấn du học, visa, hồ sơ — hữu ích nếu bạn học để sang Hàn.',
+        ],
+      },
+      {
+        type: 'image',
+        src: articleImg('hue-korean.jpg'),
+        caption: 'Nên đến xem lớp thật, hỏi giáo trình và lịch học trước khi đóng học phí dài hạn.',
+        alt: 'Học viên và giảng viên tại trung tâm tiếng Hàn Huế',
+      },
+      {
+        type: 'emphasis',
+        text: 'Cô Huyền Tiếng Hàn tại 33/79 Phùng Lưu, phường Thanh Thuỷ, TP Huế — đào tạo tiếng Hàn EPS-TOPIK và lộ trình TOPIK 1–6, kèm tư vấn du học Hàn Quốc.',
+      },
+      {
+        type: 'p',
+        text: 'Câu hỏi nên hỏi trước khi đăng ký:',
+      },
+      {
+        type: 'list',
+        items: [
+          'Khóa này tương ứng TOPIK cấp nào? Học bao lâu mới hoàn thành một giáo trình?',
+          'Có bài kiểm tra định kỳ không? Có buổi luyện đề trước kỳ thi không?',
+          'Học phí gồm giáo trình và tài liệu chưa? Có phí phát sinh không?',
+          'Nếu nghỉ buổi có được học bù không?',
+          'Giảng viên có hỗ trợ hỏi đáp ngoài giờ (Zalo/nhóm lớp) không?',
+        ],
+      },
+      {
+        type: 'p',
+        text: 'Cách thử lớp an toàn: đăng ký học thử 1–2 buổi hoặc khóa ngắn 1 tháng trước khi đóng gói dài. Quan sát xem bạn có hiểu bài, có được sửa phát âm, và có muốn tiếp tục học cùng lớp đó hay không.',
+      },
+      {
+        type: 'p',
+        text: 'Liên hệ tư vấn: 0945 201599 – 0913 801 599. Hoặc theo dõi YouTube @cohuyentienghan6329, TikTok @cohuyentienghan và nhóm Facebook Học tiếng Hàn cùng Cô Huyền để xem lịch khai giảng mới nhất.',
+      },
+    ],
+  },
+  {
+    id: 25,
+    title: 'Du học thạc sĩ tại Hàn Quốc',
+    topic: 'culture',
+    author: 'Lan Anh',
+    authorUrl: 'https://tienghancohuyen.vn/author/lan-anh',
+    avatar: avatarImg(20),
+    verified: true,
+    publishedAt: 'Vừa xong',
+    readTime: '14 phút đọc',
+    likes: 94,
+    comments: 15,
+    image: uniImg('du-hoc-Dai-hoc-Quoc-gia-Seoul.gif'),
+    icon: faGraduationCap,
+    excerpt:
+      'Điều kiện TOPIK, GPA, học phí thạc sĩ, học bổng GKS/trường và lộ trình nộp hồ sơ du học bậc Thạc sĩ tại Hàn.',
+    body: [
+      {
+        type: 'p',
+        text: 'Du học thạc sĩ (석사) tại Hàn Quốc phù hợp khi bạn đã có bằng đại học, muốn nâng chuyên môn hoặc chuyển hướng nghề nghiệp. Visa thường là D-2-3 (thạc sĩ) hoặc D-2-4 (tiến sĩ). Thời gian học phổ biến 2 năm (4 học kỳ), một số chương trình 1,5 năm.',
+      },
+      {
+        type: 'emphasis',
+        text: 'Điều kiện nền tảng thường gặp: bằng đại học (hoặc sắp tốt nghiệp), GPA tối thiểu khoảng 2.5–3.0/4.0 (tùy trường), TOPIK 3–4 trở lên (nhiều ngành yêu cầu TOPIK 4–5), và thư giới thiệu + kế hoạch nghiên cứu (research plan).',
+      },
+      {
+        type: 'image',
+        src: articleImg('masters-study.jpg'),
+        caption: 'Chuẩn bị tiếng Hàn vững trước khi nộp hồ sơ thạc sĩ giúp bạn học chuyên ngành bằng tiếng Hàn dễ hơn rất nhiều.',
+        alt: 'Nhóm học viên chuẩn bị hồ sơ và học tiếng Hàn',
+      },
+      {
+        type: 'p',
+        text: 'Học phí thạc sĩ tham khảo (won/học kỳ):',
+      },
+      {
+        type: 'list',
+        items: [
+          'Trường quốc lập vùng: khoảng 2–4 triệu won/học kỳ.',
+          'Trường quốc lập lớn (SNU, KAIST…): 2,5–5 triệu won/học kỳ tùy ngành.',
+          'Trường tư thục ở Seoul: 4–8 triệu won/học kỳ; một số ngành MBA/thiết kế cao hơn.',
+          'Chi phí sinh hoạt: 700.000–1.200.000 won/tháng tùy thành phố và kiểu nhà ở.',
+        ],
+      },
+      {
+        type: 'image',
+        src: uniImg('kuyng-hee-university.jpg'),
+        caption: 'Nhiều trường tư thục như Kyung Hee có học bổng nhập học cho thạc sĩ quốc tế nếu TOPIK và GPA đạt ngưỡng.',
+        alt: 'Đại học Kyung Hee',
+      },
+      {
+        type: 'p',
+        text: 'Học bổng phổ biến cho bậc thạc sĩ:',
+      },
+      {
+        type: 'list',
+        items: [
+          'GKS (Global Korea Scholarship) Graduate: học phí, sinh hoạt phí, vé máy bay — cạnh tranh cao, nộp sớm theo hạn Đại sứ quán hoặc trường.',
+          'Học bổng trường (교비장학금): giảm 30–100% học phí theo GPA và TOPIK mỗi kỳ.',
+          'Học bổng viện nghiên cứu / giáo sư hướng dẫn: phổ biến ở ngành kỹ thuật, khoa học — cần liên hệ professor trước.',
+        ],
+      },
+      {
+        type: 'p',
+        text: 'Lộ trình nộp hồ sơ gợi ý (nhập học tháng 3 hoặc 9):',
+      },
+      {
+        type: 'list',
+        items: [
+          'Từ 12 đến 9 tháng trước: chọn ngành và 3–5 trường; thi TOPIK; chuẩn bị bảng điểm đại học dịch công chứng.',
+          'Từ 9 đến 6 tháng trước: viết research plan / study plan; xin 2 thư giới thiệu; liên hệ giáo sư (nếu ngành nghiên cứu).',
+          'Từ 6 đến 4 tháng trước: nộp hồ sơ trực tuyến, phí xét duyệt; phỏng vấn nếu có.',
+          'Từ 4 đến 2 tháng trước: nhận giấy nhập học, đóng học phí hoặc đặt cọc; xin visa D-2.',
+          '1 tháng trước: sắp xếp chỗ ở, bảo hiểm, vé máy bay.',
+        ],
+      },
+      {
+        type: 'p',
+        text: 'Lưu ý quan trọng: một số ngành yêu cầu tiếng Anh (TOEFL/IELTS) thay vì hoặc song song với TOPIK — đặc biệt chương trình English track. Hãy đọc kỹ trang tuyển sinh quốc tế của từng khoa, không chỉ trang tiếng Hàn chung của trường.',
+      },
+      {
+        type: 'emphasis',
+        text: 'Nếu tiếng Hàn còn yếu, có thể học viện ngôn ngữ 6–12 tháng (visa D-4) rồi chuyển lên thạc sĩ. Tại Huế, hãy củng cố TOPIK trước khi nộp hồ sơ để tăng cơ hội học bổng.',
+      },
+    ],
+  },
+  {
+    id: 26,
+    title: 'Top nơi học tiếng Hàn tại Huế',
+    topic: 'other',
+    author: 'Cô Huyền',
+    authorUrl: 'https://tienghancohuyen.vn/author/co-huyen',
+    avatar: coHuyenAvatar(),
+    verified: true,
+    publishedAt: 'Vừa xong',
+    readTime: '20 phút đọc',
+    likes: 98,
+    comments: 16,
+    image: articleImg('hue-korean.jpg'),
+    icon: faStar,
+    excerpt:
+      'Top nơi học tiếng Hàn tại Huế: Cô Huyền Tiếng Hàn đứng đầu, cùng Ran Chô, Hana, Sejong, Daystar, ĐH Ngoại ngữ Huế và nhiều địa chỉ khác. Địa chỉ, hotline và điểm mạnh từng nơi.',
+    body: [
+      {
+        type: 'p',
+        text: 'Nếu bạn đang tìm địa chỉ học tiếng Hàn tại Huế uy tín, bài viết này tổng hợp các lựa chọn phổ biến dành cho học sinh, sinh viên và người đi làm. Danh sách ưu tiên nơi có lộ trình rõ ràng, giảng viên có kinh nghiệm và hỗ trợ mục tiêu thực tế như TOPIK, EPS-TOPIK, du học hoặc làm việc tại doanh nghiệp Hàn Quốc.',
+      },
+      {
+        type: 'emphasis',
+        text: '1. Cô Huyền Tiếng Hàn — lựa chọn hàng đầu khi học tiếng Hàn tại Huế',
+      },
+      {
+        type: 'image',
+        src: articleImg('hue-korean.jpg'),
+        caption: 'Cô Huyền Tiếng Hàn thuộc Công ty TNHH Cổng Chiến Thắng tại TP. Huế.',
+        alt: 'Học viên và giảng viên tại Cô Huyền Tiếng Hàn',
+      },
+      {
+        type: 'p',
+        text: 'Nếu bạn đang tìm kiếm địa chỉ học tiếng Hàn tại Huế uy tín, Cô Huyền Tiếng Hàn là một trong những lựa chọn hàng đầu dành cho học sinh, sinh viên và người đi làm. Trung tâm trực thuộc Công ty TNHH Cổng Chiến Thắng, tọa lạc tại 33/79 Phùng Lưu, phường Thanh Thuỷ, TP. Huế, với nhiều năm kinh nghiệm đào tạo tiếng Hàn theo lộ trình bài bản và thực tế.',
+      },
+      {
+        type: 'p',
+        text: 'Không chỉ giúp học viên xây dựng nền tảng vững chắc từ những bài học đầu tiên, Cô Huyền Tiếng Hàn còn định hướng rõ ràng theo từng mục tiêu như thi chứng chỉ TOPIK, EPS-TOPIK, du học Hàn Quốc, làm việc tại doanh nghiệp Hàn Quốc hay xuất khẩu lao động. Nhờ phương pháp giảng dạy dễ hiểu, sát với người Việt và chương trình học được cá nhân hóa, trung tâm đã đồng hành cùng hàng nghìn học viên chinh phục tiếng Hàn thành công.',
+      },
+      {
+        type: 'image',
+        src: articleImg('hue-classroom.jpg'),
+        caption: 'Lớp học tại Cô Huyền Tiếng Hàn: luyện đủ nghe, nói, đọc, viết theo giáo trình chuẩn.',
+        alt: 'Lớp học tiếng Hàn tại Cô Huyền Tiếng Hàn ở Huế',
+      },
+      {
+        type: 'p',
+        text: 'Vì sao nên chọn Cô Huyền Tiếng Hàn?',
+      },
+      {
+        type: 'p',
+        text: 'Điểm khác biệt của Cô Huyền Tiếng Hàn không chỉ nằm ở đội ngũ giảng viên giàu kinh nghiệm mà còn ở hệ thống đào tạo chuyên nghiệp, giúp học viên học đúng trình độ và đạt đúng mục tiêu trong thời gian tối ưu.',
+      },
+      {
+        type: 'p',
+        text: 'Lộ trình học rõ ràng, chuẩn quốc tế: ngay khi đăng ký, học viên được kiểm tra năng lực đầu vào để xếp lớp phù hợp. Chương trình được xây dựng theo khung chuẩn từ TOPIK 1 đến TOPIK 6, kết hợp lộ trình EPS-TOPIK dành cho người có nhu cầu làm việc tại Hàn Quốc.',
+      },
+      {
+        type: 'p',
+        text: 'Phương pháp giảng dạy dễ hiểu: ngữ pháp tiếng Hàn được giải thích theo tư duy của người Việt, giúp học viên tiếp thu nhanh, ghi nhớ lâu và biết cách áp dụng vào giao tiếp thực tế. Các buổi học cân bằng đầy đủ bốn kỹ năng:',
+      },
+      {
+        type: 'list',
+        items: ['Nghe: luyện nghe hội thoại và đề thi thực tế', 'Nói: luyện hội thoại, sửa phát âm thường xuyên', 'Đọc: đọc hiểu theo cấp độ TOPIK', 'Viết: viết câu – đoạn văn theo dạng đề'],
+      },
+      {
+        type: 'p',
+        text: 'Đội ngũ giảng viên giàu kinh nghiệm: giảng viên có nhiều năm giảng dạy tiếng Hàn, am hiểu những lỗi phổ biến của người Việt khi học ngoại ngữ, từ đó đưa ra phương pháp hướng dẫn phù hợp với từng đối tượng học viên.',
+      },
+      {
+        type: 'p',
+        text: 'Đối tượng phù hợp',
+      },
+      {
+        type: 'list',
+        items: [
+          'Người mới bắt đầu học tiếng Hàn từ con số 0',
+          'Học sinh, sinh viên cần học để thi TOPIK hoặc chuẩn bị du học',
+          'Người đi làm muốn học buổi tối hoặc cuối tuần',
+          'Người có nhu cầu thi EPS-TOPIK để xuất khẩu lao động',
+          'Nhân viên làm việc tại doanh nghiệp Hàn Quốc muốn nâng cao khả năng giao tiếp',
+        ],
+      },
+      {
+        type: 'p',
+        text: 'Hỗ trợ toàn diện sau khi học: không chỉ đào tạo tiếng Hàn, trung tâm còn đồng hành cùng học viên trong nhiều mục tiêu khác nhau như tư vấn lộ trình du học Hàn Quốc, hướng dẫn chuẩn bị hồ sơ du học, luyện thi TOPIK và EPS-TOPIK theo từng cấp độ, định hướng kế hoạch học tập và nghề nghiệp phù hợp với từng học viên.',
+      },
+      {
+        type: 'p',
+        text: 'Kênh học tập miễn phí: ngoài các lớp học trực tiếp, học viên còn có thể ôn luyện và cập nhật kiến thức qua hệ thống kênh trực tuyến.',
+      },
+      {
+        type: 'list',
+        items: [
+          'YouTube: @cohuyentienghan6329',
+          'TikTok: @cohuyentienghan',
+          'Facebook: Học tiếng Hàn cùng Cô Huyền',
+        ],
+      },
+      {
+        type: 'p',
+        text: 'Thông tin liên hệ Cô Huyền Tiếng Hàn:',
+      },
+      {
+        type: 'list',
+        items: [
+          'Địa chỉ: 33/79 Phùng Lưu, phường Thanh Thuỷ, TP. Huế',
+          'Điện thoại: 0945 201599 – 0913 801599',
+        ],
+      },
+      {
+        type: 'emphasis',
+        text: '2. Tiếng Hàn Huế – Ran Chô',
+      },
+      {
+        type: 'p',
+        text: 'Ran Chô là một trong những trung tâm dạy tiếng Hàn Quốc nổi tiếng ở Huế. Được thành lập vào năm 2017, đến nay Ran Chô trở thành nơi đào tạo tiếng Hàn chuyên nghiệp và đáng tin cậy với nhiều học viên tại địa phương. Trung tâm hướng đến môi trường học thoải mái, vui vẻ; giáo viên và trợ giảng theo dõi, kiểm tra quá trình học để học viên tiến bộ từng ngày.',
+      },
+      {
+        type: 'p',
+        text: 'Ran Chô chú trọng kết hợp lý thuyết với thực hành để học viên vận dụng ngay kiến thức trên lớp. Điều đặc biệt là trung tâm còn có chương trình học tiếng Anh – Hàn dành cho trẻ nhỏ, giúp các bé tiếp cận ngoại ngữ sớm. Nhiều thế hệ học viên từ đây đã đi du học Hàn hoặc làm việc tại công ty liên doanh Việt – Hàn.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Địa chỉ: 11/3/100 Ngự Bình, An Cựu, Thành phố Huế, Thừa Thiên Huế',
+          'Hotline: 093 622 45 43 – 0839 833 284',
+          'Email: anchokorean@gmail.com',
+          'Website: https://tieng-han-hue-ran-cho.business.site/',
+          'Thời gian làm việc: Thứ Hai đến Thứ Bảy 08:00–19:00; Chủ Nhật nghỉ',
+        ],
+      },
+      {
+        type: 'emphasis',
+        text: '3. Trung tâm Hàn ngữ Hana',
+      },
+      {
+        type: 'p',
+        text: 'Trung tâm Hàn ngữ Hana hướng đến trải nghiệm học dễ chịu ngay từ buổi đầu. Đội ngũ giảng viên giàu kinh nghiệm, nhiều người tốt nghiệp thạc sĩ tại Hàn Quốc và đạt TOPIK cấp 6. Ngoài tiếng Hàn, học viên còn được chia sẻ về văn hóa và cuộc sống tại Hàn. Lịch học linh động theo nhu cầu; học phí có phần ưu đãi hơn một số trung tâm lớn, và học viên thường được tặng giáo trình theo cấp độ khi đăng ký khóa học.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Địa chỉ: Tầng 8 Chung cư Aranya, Dương Khê, Xuân Phú, Thành phố Huế, Thừa Thiên Huế',
+          'Hotline: 0816 314 660',
+          'Facebook: Trung tâm Hàn ngữ Hana Huế',
+        ],
+      },
+      {
+        type: 'emphasis',
+        text: '4. Trung tâm Hàn ngữ Sejong',
+      },
+      {
+        type: 'p',
+        text: 'Sejong được xem là một trong những trung tâm Hàn ngữ lớn tại Huế. Sau nhiều năm hoạt động, trung tâm thu hút hàng nghìn học viên. Môi trường học chuyên nghiệp, kiến thức được đào sâu để học viên vận dụng tốt hơn. Hằng năm, Sejong tổ chức các cuộc thi hùng biện tiếng Hàn để tìm học viên ưu tú và trao học bổng, quà tặng.',
+      },
+      {
+        type: 'p',
+        text: 'Một năm học ở Sejong chia thành nhiều học kỳ, mỗi học kỳ kéo dài khoảng hai đến ba tháng. Một cấp độ lớn được chia thành nhiều cấp nhỏ (ví dụ sơ cấp gồm cấp 1, 2, 3) để học viên nắm chắc từng phần. Cuối mỗi học kỳ có bài kiểm tra đánh giá tiến bộ. Đội ngũ giảng viên dày kinh nghiệm theo dõi quá trình học để điều chỉnh phương pháp phù hợp. Nếu bạn đang cân nhắc du học Hàn Quốc, Sejong cũng là lựa chọn được nhiều người quan tâm; học viên hoàn thành trung cấp II thường thuận lợi hơn khi chuẩn bị hồ sơ visa du học.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Địa chỉ: 4 Lê Lợi, Thành phố Huế; và 1 Điện Biên Phủ, Thành phố Huế',
+          'Hotline: 0234 3 854 555',
+          'Email: sejonghue2013@gmail.com',
+          'Website: http://www.sejonghakdang.org/',
+          'Thời gian làm việc: Thứ Hai đến Thứ Bảy 09:00–19:30; Chủ Nhật 09:00–15:00',
+        ],
+      },
+      {
+        type: 'emphasis',
+        text: '5. Daystar Education',
+      },
+      {
+        type: 'p',
+        text: 'Được thành lập từ năm 2010, Daystar ban đầu tập trung tìm kiếm nhân lực và đào tạo hướng đến du học Nhật Bản. Khi nhu cầu du học Đài Loan, Hàn Quốc tăng, Daystar mở rộng sang tư vấn du học, thực tập sinh kỹ năng và đào tạo ngoại ngữ. Trung tâm theo phương châm lấy chữ “Tín” làm gốc và chữ “Tâm” làm nền tảng phát triển.',
+      },
+      {
+        type: 'p',
+        text: 'Trong hơn mười năm hoạt động, Daystar khẳng định uy tín trong tư vấn du học và đào tạo ngoại ngữ, đồng thời là đối tác của nhiều nghiệp đoàn, doanh nghiệp và hơn 30 trường tại Hàn Quốc. Đơn vị đã hỗ trợ hơn 1.000 du học sinh và hàng trăm lao động sang học tập, làm việc tại Hàn. Đội ngũ lãnh đạo và giáo viên có kinh nghiệm tại doanh nghiệp nước ngoài, linh hoạt trong đào tạo kỹ năng mềm. Nếu bạn đam mê tiếng Hàn và muốn đi du học hoặc làm việc tại Hàn Quốc, Daystar là môi trường kết hợp ngôn ngữ với kỹ năng sống và làm việc.',
+      },
+      {
+        type: 'emphasis',
+        text: '6. Trường Đại học Ngoại ngữ Huế',
+      },
+      {
+        type: 'p',
+        text: 'Ngoài chương trình đại học chính quy, Trường Đại học Ngoại ngữ Huế còn tổ chức các chương trình đào tạo ngoại ngữ không chuyên, trong đó có tiếng Hàn. Các khóa này dành cho học viên yêu thích ngoại ngữ, không giới hạn độ tuổi và trình độ. Nếu bạn muốn học tiếng Hàn tại Huế với chi phí tiết kiệm hơn, đây là lựa chọn đáng cân nhắc trong môi trường đại học.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Địa chỉ: 57 Nguyễn Khoa Chiêm, An Cựu, Thừa Thiên Huế',
+          'Điện thoại: 0234.3830677',
+          'Fax: 0234.3830820',
+          'Email: hucfl@hueuni.vn',
+          'Website: http://hucfl.edu.vn',
+        ],
+      },
+      {
+        type: 'emphasis',
+        text: '7. Trung tâm Hàn ngữ Seoul – SIA',
+      },
+      {
+        type: 'p',
+        text: 'Seoul SIA là trung tâm Hàn ngữ có tiếng tại Huế, do giám đốc người Hàn Quốc – thầy Jung điều hành. Thầy Jung có hơn 10 năm kinh nghiệm giảng dạy tiếng Hàn và từng quản lý, giảng dạy tại trường ngoại ngữ Sejong. Học viên có cơ hội học và thực hành với giáo viên Hàn Quốc trong không gian lớp học hiện đại, mang phong cách Hàn.',
+      },
+      {
+        type: 'p',
+        text: 'Học phí tham khảo từ khoảng 630.000 đồng/tháng kèm sách, tài liệu; học viên mới có thể được giảm 10%, học viên cũ giảm 20% tùy chương trình ưu đãi tại thời điểm đăng ký. Trung tâm chú trọng chất lượng đầu ra và trải nghiệm học tập thoải mái.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Địa chỉ: Số B1.27 Khu quy hoạch Tam Thai, Hồ Đắc Di, Huế, Thừa Thiên Huế',
+          'Hotline: 0234 3 888 369',
+          'Liên hệ: ttnnseoul.contact@gmail.com',
+        ],
+      },
+      {
+        type: 'emphasis',
+        text: '8. Tiếng Hàn Nari Huế',
+      },
+      {
+        type: 'p',
+        text: 'Nếu bạn muốn môi trường vừa học vừa vui, Tiếng Hàn Nari Huế với phong cách giảng dạy gần gũi của cô Duyên là lựa chọn được nhiều bạn trẻ quan tâm. Đây không phải trung tâm lớn đình đám, nhưng vẫn thu hút nhờ sự tận tâm và không khí lớp học dễ tiếp cận. Học viên được khuyến khích vận dụng tiếng Hàn ngay trong giao tiếp trên lớp và đời sống hàng ngày. Bạn có thể nhắn tin Facebook cho cô để hỏi lịch học và đăng ký khóa phù hợp.',
+      },
+      {
+        type: 'emphasis',
+        text: '9. Asia Education',
+      },
+      {
+        type: 'p',
+        text: 'Asia Education là đơn vị tư vấn du học và đào tạo tiếng Hàn tại Huế với bề dày hơn 10 năm. Asia hỗ trợ nhiều học sinh, sinh viên Huế hoàn thiện hồ sơ du học Hàn Quốc. Đội ngũ lãnh đạo và nhân viên được đào tạo bài bản, nhiều người có trải nghiệm tại Hàn. Học viên học tiếng Hàn trong môi trường chuyên nghiệp, đồng thời được tìm hiểu văn hóa Hàn Quốc song song với ngôn ngữ.',
+      },
+      {
+        type: 'emphasis',
+        text: '10. Kokono',
+      },
+      {
+        type: 'p',
+        text: 'Trung tâm Ngoại ngữ – Tư vấn Du học Kokono đến với Thừa Thiên Huế sau khi phát triển tại các thành phố lớn như Hà Nội và TP.HCM. Kokono mang đến lớp tiếng Hàn cấp tốc chất lượng cao: học viên vừa học ngôn ngữ vừa nhận chia sẻ kinh nghiệm giao tiếp thực tế. Lớp khai giảng hằng tuần, sĩ số ít để đảm bảo hiệu quả; chương trình bám chuẩn Kokono trên toàn quốc với thời lượng học dày hơn.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Địa chỉ: Đường Ngô Quyền, Vĩnh Ninh, Huế, Thừa Thiên Huế',
+          'Hotline: 0989 129 886 – 0913 828 222',
+          'Website: http://duhockokono.vn/khoa-hoc-tieng-han-giao-tiep-cap-toc.htm',
+        ],
+      },
+      {
+        type: 'emphasis',
+        text: '11. Unica (học tiếng Hàn online)',
+      },
+      {
+        type: 'p',
+        text: 'Không phải ai cũng có điều kiện và thời gian đến trung tâm mỗi tuần. Unica Online giúp bạn học tiếng Hàn mọi lúc, mọi nơi — phù hợp người ở Huế muốn tiết kiệm chi phí và chủ động lịch học. Tuy nhiên, tự học online cần kỷ luật cao; nhiều bạn kết hợp Unica với lớp trực tiếp tại địa phương để được sửa lỗi phát âm và giữ nhịp học đều.',
+      },
+      {
+        type: 'list',
+        items: [
+          'Hotline: 0988 911 329',
+          'Website: http://tienghangiaotiep.unica.com.vn/',
+        ],
+      },
+      {
+        type: 'p',
+        text: 'Cách chọn nơi học tiếng Hàn tại Huế phù hợp',
+      },
+      {
+        type: 'list',
+        items: [
+          'Muốn lộ trình TOPIK 1–6, EPS-TOPIK và tư vấn du học rõ ràng: ưu tiên Cô Huyền Tiếng Hàn',
+          'Thích môi trường vui, có lớp cho trẻ nhỏ: tham khảo Ran Chô',
+          'Cần lịch linh động và học phí mềm: xem Hana hoặc Seoul SIA',
+          'Muốn hệ thống học kỳ chặt chẽ, hướng du học: cân nhắc Sejong hoặc Asia, Daystar, Kokono',
+          'Ngân sách tiết kiệm, học trong môi trường đại học: ĐH Ngoại ngữ Huế',
+          'Không sắp xếp được giờ đến lớp: kết hợp Unica online với luyện nói định kỳ',
+        ],
+      },
+      {
+        type: 'p',
+        text: 'Hy vọng danh sách trên giúp bạn chọn được địa chỉ học tiếng Hàn tại Huế phù hợp mục tiêu. Trước khi đăng ký, nên hỏi rõ giáo trình, sĩ số, lịch học và đầu ra TOPIK/EPS để tránh mất thời gian và chi phí không cần thiết.',
+      },
+    ],
+  },
 ]
 
 /** Bài du học, cuộc sống, học hành — hiển thị trước trên trang chủ và danh sách bài viết */
 const ARTICLE_DISPLAY_ORDER: number[] = [
-  16, 17, 19, 18, 20, 21, 10, 11, 12, 13, 14, 15, 22,
+  26, 23, 24, 25, 16, 17, 19, 18, 20, 21, 10, 11, 12, 13, 14, 15, 22,
   1, 2, 3, 4, 5, 6, 7, 8, 9,
 ]
 

@@ -79,10 +79,6 @@ export function ArticleDetail({ articleId, onBack, onSelectArticle }: ArticleDet
             {article.title}
           </h1>
 
-          <div className="article-detail__cover">
-            <img src={article.image} alt={article.title} itemProp="image" />
-          </div>
-
           <div className="article-detail__head">
             <div className="article-detail__author">
               <img src={article.avatar} alt={`Ảnh đại diện ${article.author}`} />
@@ -178,35 +174,28 @@ export function ArticleDetail({ articleId, onBack, onSelectArticle }: ArticleDet
             </section>
           )}
 
-          <section className="article-detail__section">
-            <h2>Bài viết nổi bật khác</h2>
+          <section className="article-detail__section" aria-labelledby="article-featured-title">
+            <h2 id="article-featured-title">Bài viết nổi bật khác</h2>
             <div className="article-detail__featured">
               {featured.map((item) => (
-                <article
+                <button
                   key={item.id}
+                  type="button"
                   className="article-detail__featured-card"
-                  role="button"
-                  tabIndex={0}
                   onClick={() => onSelectArticle(item.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault()
-                      onSelectArticle(item.id)
-                    }
-                  }}
                 >
-                  <div className="article-detail__featured-thumb">
-                    <img src={item.image} alt="" loading="lazy" />
-                  </div>
-                  <div>
-                    <h3>{item.title}</h3>
-                    <div className="article-detail__featured-meta">
+                  <span className="article-detail__featured-thumb">
+                    <img src={item.image} alt="" loading="lazy" decoding="async" />
+                  </span>
+                  <span className="article-detail__featured-body">
+                    <span className="article-detail__featured-title">{item.title}</span>
+                    <span className="article-detail__featured-meta">
                       <img src={item.avatar} alt="" />
                       <span>{item.author}</span>
                       <span>· {item.readTime}</span>
-                    </div>
-                  </div>
-                </article>
+                    </span>
+                  </span>
+                </button>
               ))}
             </div>
           </section>
